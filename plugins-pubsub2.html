@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>Same channel than previous page "dataChanged".</p>
+
+    <a href="javascript:;" id="subscribe_dataChanged">subscribe</a><br/>
+
+    <a href="javascript:;" id="publish_dataChanged">publish something</a><br/>
+
+    <a href="javascript:;" id="unsubscribe_dataChanged">unsubscribe</a><br/>
+
+</div>
+
+<div id="dataChanged_log" class="block" style="padding:5px; background:#CCC; min-height: 40px;">
+    <b>Channel "dataChanged"</b><br/>
+    messages received (once subscribed) will appear here<br/>
+</div>
+
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="../platform/cobalt.js"></script>
+
+
+<script type="text/javascript" src="js/cobalt.pubsub.js"></script>
+<script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+
+
+    Zepto(function($){
+
+        cobalt.init({
+            debug:app.debug,
+            debugInBrowser:app.debugInBrowser,
+            debugInDiv:false
+        });
+        app.initPage('PubSub Plugin page2')
+
+        $('#publish_dataChanged').on('click',function(){
+            cobalt.publish('dataChanged', { some : "other", random : "value" });
+        });
+        $('#subscribe_dataChanged').on('click',function(){
+            cobalt.subscribe('dataChanged', function(message){
+                $('#dataChanged_log').append(JSON.stringify(message)+'<br/>');
+            });
+        });
+        $('#unsubscribe_dataChanged').on('click',function(){
+            cobalt.unsubscribe('dataChanged');
+        });
+
+
+    })
+
+</script>
+
+</body>
+</html>
