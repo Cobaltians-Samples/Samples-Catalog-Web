@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>	        
+    </head>
+    <body class="green">
+
+        <div class="block">
+            <p>Oh you should have seen an alert with your data.</p>
+
+            <p>It works for all navigation commands. Here, a pop with data.</p>
+            <a id="popWithData" href="javascript:;">Pop with data</a>
+
+
+
+        </div>
+
+        <script type="text/javascript" src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="../platform/cobalt.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+
+
+        <script>
+
+            Zepto(function($){
+
+                cobalt.init({
+                    debug:app.debug,
+                    debugInBrowser:app.debugInBrowser,
+                    debugInDiv:app.debugInDiv,
+
+                    events:{
+                        onPageShown:function(data){
+                            if (data){
+                                cobalt.alert({
+                                    title : 'Some data where sent to the page',
+                                    message : JSON.stringify(data)
+                                });
+                            }else{
+                                cobalt.toast('no data where sent to the page');
+                            }
+                        }
+                    }
+                });
+
+                app.initPage('advanced navigation');
+
+                app.touch('#popWithData',function(){
+                    cobalt.navigate.pop({ ho : "yeah" });
+                });
+
+
+            })
+
+
+        </script>
+
+    </body>
+</html>

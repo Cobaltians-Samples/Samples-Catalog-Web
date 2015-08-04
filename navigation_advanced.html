@@ -10,16 +10,21 @@
         <div class="block">
             <p>Replacing the current view with an other one, without touching to the history, can be useful in some cases. For example, separating a form in multiple pages, as an alternative to modals, or for a side menu feature.</p>
 
-            <p>Here you can see it in action. Buttons bellow will replace the current view with an other one. This other one should work as expected. When going back, you will not come back on this page, but on the index page.</p>
+            <p>Here you can see it in action. Buttons bellow will replace the current view with another one.</p>
 
-            <a class="replace" href="javascript:;" data-href="events.html" data-classid="events" data-animated="true">Using events (animated replace)</a>
-            <a class="replace" href="javascript:;" data-href="plugins.html" data-classid="plugins" data-animated="false">Cobalt Plugins (rough replace)</a>
+            <a class="replace" href="javascript:;" data-href="events.html" data-classid="events" data-animated="true">Replace with push animation</a>
+            <a class="replace" href="javascript:;" data-href="events.html" data-classid="events" data-animated="false">Rough replace</a>
 
         </div>
 
         <div class="block">
-            <p>On the next page below, you will be able to pop to the index</p>
+            <p>On the next page below, you will be able to pop directly to the index</p>
             <a class="push" href="javascript:;" data-href="navigation_popToController.html">navPopTo</a>
+        </div>
+
+        <div class="block">
+            <p>Sometimes, you will have to give data to the next or the previous page. This link does just that.</p>
+            <a id="pushWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Push with data</a>
         </div>
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
@@ -34,10 +39,21 @@
                 cobalt.init({
                     debug:app.debug,
                     debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv
+                    debugInDiv:app.debugInDiv,
+
+                    events:{
+                        onPageShown:function(data){
+                            if (data){
+                                cobalt.alert({
+                                    title : 'Some data where sent to the page',
+                                    message : JSON.stringify(data)
+                                });
+                            }
+                        }
+                    }
                 });
 
-                app.initPage('navigation replace');
+                app.initPage('advanced navigation');
 
                 app.touch('a.replace',function(){
                     cobalt.navigate.replace({
@@ -45,7 +61,13 @@
                         controller : $(this).attr('data-classid'),
                         animated : ($(this).attr('data-animated') === "true")
                     });
+                });
 
+                app.touch('#pushWithData',function(){
+                    cobalt.navigate.push({
+                        page : "navigation_pushedWithData.html",
+                        data : { hip : "hop", you : "dont stop" }
+                    })
                 });
 
             })
