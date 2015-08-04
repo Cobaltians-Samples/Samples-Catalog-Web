@@ -1,0 +1,9 @@
+[submodule "js/pubsub"]
+	path = js/pubsub
+	url = git://github.com/cobaltians-plugins/plugins-PubSub-Web.git
+[submodule "js/location"]
+	path = js/location
+	url = git://github.com/cobaltians-plugins/plugins-Location-Web.git
+[submodule "js/webservices"]
+	path = js/webservices
+	url = git://github.com/cobaltians-plugins/plugins-Webservices-Web.git
