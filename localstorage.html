@@ -60,24 +60,23 @@
 
                 });
 
-                cobalt.log("init dismissInformations : "+cobalt.storage.getItem("dismissInformations"));
-                cobalt.log("init testLocalStorageKey : "+cobalt.storage.getItem("testLocalStorageKey"));
+                cobalt.log("init testLocalStorageKey : "+cobalt.storage.get("testLocalStorageKey"));
 
 
                 app.touch('a#store',function(){
                     var obj={ value: "stored"}
                     cobalt.log("Changing value to", obj)
-                    cobalt.storage.setItem('testLocalStorageKey',obj, "json")
+                    cobalt.storage.set('testLocalStorageKey',obj)
                 });
 
                 app.touch('a#store2',function(){
                     var obj={ value: "saved"}
                     cobalt.log("Changing value to", obj)
-                    cobalt.storage.setItem('testLocalStorageKey',obj, "json")
+                    cobalt.storage.set('testLocalStorageKey',obj)
                 });
 
                 app.touch('a#retrieve',function(){
-                    var keyvalue=cobalt.storage.getItem('testLocalStorageKey',"json")
+                    var keyvalue=cobalt.storage.get('testLocalStorageKey')
                     if (keyvalue){
                         if (keyvalue.value){
                             cobalt.log("value key of 'testLocalStorageKey' contains : "+ keyvalue.value)
@@ -102,39 +101,38 @@
                     cobalt.log("-- launching automatic tests")
                     cobalt.storage.clear();
 
-
                     app.assertEqual('set/get', function(){
-                        cobalt.storage.setItem("setget","toto");
-                        return cobalt.storage.getItem("setget");
+                        cobalt.storage.set("setget","toto");
+                        return cobalt.storage.get("setget");
                     },"toto");
 
                     app.assertEqual('null', function(){
-                        cobalt.storage.setItem("null",null);
-                        return cobalt.storage.getItem("toto");
+                        cobalt.storage.set("null",null);
+                        return cobalt.storage.get("toto");
                     },null);
 
                     app.assertEqual('undef', function(){
-                        cobalt.storage.setItem("undef",undefined);
-                        return cobalt.storage.getItem("undef");
-                    },"undefined") //nice one browsers... ;)
+                        cobalt.storage.set("undef",undefined);
+                        return cobalt.storage.get("undef");
+                    },undefined)
 
                     app.assertEqual('set/set', function(){
-                        cobalt.storage.setItem("setset","toto");
-                        cobalt.storage.setItem("setset","tata");
-                        return cobalt.storage.getItem("setset");
+                        cobalt.storage.set("setset","toto");
+                        cobalt.storage.set("setset","tata");
+                        return cobalt.storage.get("setset");
                     },"tata");
 
                     app.assertEqual('set/rem', function(){
-                        cobalt.storage.setItem("setrem","toto");
-                        cobalt.storage.removeItem("setrem");
-                        return cobalt.storage.getItem("setrem");
-                    }, null);
+                        cobalt.storage.set("setrem","toto");
+                        cobalt.storage.remove("setrem");
+                        return cobalt.storage.get("setrem");
+                    }, undefined);
 
 
                     app.assertEqual('jsonSetGet', function(){
                         var obj1={a:1, b:"xyz", c:true};
-                        cobalt.storage.setItem("jsonSetGet",obj1, "json");
-                        var obj2=cobalt.storage.getItem("jsonSetGet","json");
+                        cobalt.storage.set("jsonSetGet",obj1, "json");
+                        var obj2=cobalt.storage.get("jsonSetGet","json");
                         var result=true;
                         $.each(obj1,function(index,item){
                             if (obj1[index]!=obj2[index]){
@@ -152,7 +150,7 @@
                     cobalt.toast('started...')
                     var startTime=new Date().getTime();
                     for (var i=1;i<=2000;i++){
-                        cobalt.storage.setItem('item_'+i,"splendid value stored")
+                        cobalt.storage.set('item_'+i,"splendid value stored")
                     }
                     var endTime=new Date().getTime();
                     cobalt.toast('ended. done in '+(endTime-startTime)+"ms")
@@ -163,7 +161,7 @@
                     var startTime=new Date().getTime();
                     var values=[]
                     for (var i=1;i<=2000;i++){
-                        values.push(cobalt.storage.getItem('item_'+i));
+                        values.push(cobalt.storage.get('item_'+i));
                     }
                     var endTime=new Date().getTime();
                     cobalt.toast('ended. done in '+(endTime-startTime)+"ms")

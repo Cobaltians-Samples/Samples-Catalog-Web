@@ -41,18 +41,17 @@
                     debugInDiv:app.debugInDiv
 	            });
 
-               	cobalt.log("init dismissInformations : "+cobalt.storage.getItem("dismissInformations"));
-				cobalt.log("init testLocalStorageKey : "+cobalt.storage.getItem("testLocalStorageKey"));
+               	cobalt.log("init testLocalStorageKey : "+cobalt.storage.get("testLocalStorageKey"));
                 
 
                 app.touch('a#store',function(){
                     var obj={ value: "changed"}
                     cobalt.log("Changing value to", obj)
-                    cobalt.storage.setItem('testLocalStorageKey',obj, "json")
+                    cobalt.storage.set('testLocalStorageKey',obj, "json")
                 });
 
                 app.touch('a#retrieve',function(){
-                    var keyvalue=cobalt.storage.getItem('testLocalStorageKey',"json")
+                    var keyvalue=cobalt.storage.get('testLocalStorageKey',"json")
                     if (keyvalue){
                         if (keyvalue.value){
                             cobalt.log("value key of 'testLocalStorageKey' contains : "+ keyvalue.value)
