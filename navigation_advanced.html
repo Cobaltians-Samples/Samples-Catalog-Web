@@ -24,7 +24,10 @@
 
         <div class="block">
             <p>Sometimes, you will have to give data to the next or the previous page. This link does just that.</p>
-            <a id="pushWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Push with data</a>
+            <a id="pushWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Push with data</a><br/>
+
+            <p>Same thing with a modal.</p>
+            <a id="modalWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Modal with data</a><br/>
         </div>
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
@@ -67,7 +70,14 @@
                     cobalt.navigate.push({
                         page : "navigation_pushedWithData.html",
                         data : { hip : "hop", you : "dont stop" }
-                    })
+                    });
+                });
+
+                app.touch('#modalWithData',function(){
+                    cobalt.navigate.modal({
+                        page : "navigation_pushedWithData.html",
+                        data : { hip : "hop", you : "dont stop" }
+                    });
                 });
 
             })

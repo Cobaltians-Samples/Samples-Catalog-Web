@@ -12,10 +12,18 @@
 
             <p>It works for all navigation commands. Here, a pop with data.</p>
             <a id="popWithData" href="javascript:;">Pop with data</a>
-
-
-
         </div>
+
+        <div class="block">
+            <p>In case you came here from the modal link, here is a dismiss with data.</p>
+            <a id="dismissWithData" href="javascript:;">Dismiss with data</a>
+        </div>
+
+        <div class="block">
+            <p>And now, this link does a replace with data. replacing the current view another version of the same view.</p>
+            <a id="replaceWithData" href="javascript:;">Replace with data</a>
+        </div>
+
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
         <script type="text/javascript" src="../platform/cobalt.js"></script>
@@ -51,6 +59,16 @@
                     cobalt.navigate.pop({ ho : "yeah" });
                 });
 
+                app.touch('#dismissWithData',function(){
+                    cobalt.navigate.dismiss({ ho : "yeah" });
+                });
+
+                app.touch('#replaceWithData',function(){
+                    cobalt.navigate.replace({
+                        page : 'navigation_pushedWithData.html',
+                        data : { ho : "replace is fun" }
+                    });
+                });
 
             })
 
