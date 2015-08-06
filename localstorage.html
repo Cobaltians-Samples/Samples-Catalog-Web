@@ -101,20 +101,23 @@
                     cobalt.log("-- launching automatic tests")
                     cobalt.storage.clear();
 
-                    app.assertEqual('set/get', function(){
+                    
+					app.assertEqual('set/get', function(){
                         cobalt.storage.set("setget","toto");
                         return cobalt.storage.get("setget");
                     },"toto");
+					
 
                     app.assertEqual('null', function(){
                         cobalt.storage.set("null",null);
-                        return cobalt.storage.get("toto");
+                        return cobalt.storage.get("null");
                     },null);
 
                     app.assertEqual('undef', function(){
                         cobalt.storage.set("undef",undefined);
                         return cobalt.storage.get("undef");
                     },undefined)
+
 
                     app.assertEqual('set/set', function(){
                         cobalt.storage.set("setset","toto");

@@ -1,7 +1,7 @@
 var app={
     debug:true,
     //debugInBrowser:true,
-    debugInDiv:true,
+    //debugInDiv:true,
 
     /* This code below, combined with the touch module of zepto helps in resolving issues
        with fastclick on android devices : some devices receive "tap" event before "click" and
@@ -86,19 +86,20 @@ var app={
     /* a small assert function used in localStorage and callbacks pages */
     assertEqual : function(testID,func_or_result,expectedResult){
         try{
-            var result= ( typeof func_or_result =="function") ? func_or_result() : func_or_result;
+            var result= ( typeof func_or_result == "function") ? func_or_result() : func_or_result;
             cobalt.log('testing', result, 'vs', expectedResult);
             if (result === expectedResult){
-                cobalt.log('test #'+testID+" success! ");
+                cobalt.toast('test #'+testID+" success! ");
                 return true;
             }else{
-                cobalt.log('test #'+testID+" failed! ");
-                cobalt.log(result, " != ", expectedResult);
+                cobalt.toast('test #'+testID+" failed! ");
+                cobalt.log(result, typeof  result, " != ", expectedResult, typeof  expectedResult);
             }
         }catch(e){
-            cobalt.log('test #'+testID+" failed! ", e)
+            cobalt.toast('test #'+testID+" failed! " + e)
         }
         return false;
     }
+
 
 }
