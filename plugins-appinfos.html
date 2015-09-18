@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    </head>
+    <body class="theme_green">
+
+        <div class="block">
+            <p>Your app infos should appears in the space bellow. If not, check if you have correctly installed the plugin or look at your device logs for any clues.</p>
+        </div>
+        <div class="block">
+            <p>Your app infos are: <b id="locationField" style="border:1px solid #ccc; padding:5px;">[waiting for plugin...]</b></p>
+
+        </div>
+        <script type="text/javascript" src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="../platform/cobalt.js"></script>
+
+
+        <script type="text/javascript" src="../AppInfosPlugin/cobalt.appInfos.js"></script>
+        <!--<script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>-->
+        <script type="text/javascript" src="js/app.js"></script>
+
+        <script>
+
+            Zepto(function($){
+                cobalt.init({
+                    debug:app.debug,
+                    debugInBrowser:app.debugInBrowser,
+                    debugInDiv:app.debugInDiv
+                });
+
+                cobalt.getAppInfos(function(infos){
+                    //You received infos. It contains 'versionCode', 'versionNumber', and so on.
+                   cobalt.log('app version is :', infos);
+                   document.getElementById('locationField').innerHTML = JSON.stringify(infos);
+                });
+
+                app.initPage('AppInfos Plugin');
+            });
+
+        </script>
+
+    </body>
+</html>
