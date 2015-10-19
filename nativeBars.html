@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>	        
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>            
     </head>
     <body class="green">
 
@@ -59,21 +59,26 @@
                     debugInDiv:false
                 });
 
-                cobalt.nativeBars.onBarButtonPressed({
-                    "black_sun":function(){
-                        barLog("black sun")
-                    },
-                    "cloudy":function(){
-                        barLog('Oh no, clouds again !')
-                    },
-                    "moon":function(){
-                        barLog('Moon is the queen !')
-                    },
-                    "sun":function(){
-                        barLog("Sun is the button's king !")
-                    },
-                    "wind":function(){
-                        barLog('Wind !')
+                cobalt.nativeBars.setEventListener(function(item, event){
+                    switch(item){
+                        case "black_sun":
+                            barLog("black sun");
+                            break;
+                        case "cloudy":
+                            barLog('Oh no, clouds again !');
+                            break;
+                        case "moon":
+                            barLog('Moon is the queen !');
+                            break;
+                        case "sun":
+                            barLog("Sun is the button's king !");
+                            break;
+                        case "wind":
+                            barLog('Wind !');
+                            break;
+                        default :
+                            barLog('An unknown button has been pressed.');
+                            break;
                     }
                 });
 
