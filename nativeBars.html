@@ -31,6 +31,12 @@
 
             <a href="javascript:;" id="changeTitles">change page title and wind title.</a>
         </div>
+        
+        <div class="block">
+            <p>And push new page with bars</p>
+            
+            <a href="javascript:;" id="pushWithBars">Push a page with bars</a>
+        </div>
 
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
@@ -111,6 +117,29 @@
                        wind : "new wind text"
                    });
                 })
+                  
+                app.touch('#pushWithBars',function(){
+                    cobalt.navigate.push({
+                        page: "nativeBars.html",
+                        controller: "nativeBars",
+                        bars: {
+                            visible: {
+                                top: true
+                            },
+                            backgroundColor: "#44FF44",
+                            color: "FFF",
+                            title: "Pushed",
+                            actions: [{
+                                name: "sun",
+                                title: "Sun !",
+                                androidPosition: "top",
+                                iosPosition: "topRight",
+                                androidIcon: "fr.cobaltians.cobaltcatalog:sun",
+                                iosIcon: "sun.png",
+                            }]
+                        }
+                    });
+                });
             })
 
 
