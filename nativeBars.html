@@ -33,8 +33,9 @@
         </div>
         
         <div class="block">
-            <p>And push new page with bars</p>
+            <p>And set bars dynamically.</p>
             
+            <a href="javascript:;" id="setBars">Set bars</a>
             <a href="javascript:;" id="pushWithBars">Push a page with bars</a>
         </div>
 
@@ -117,26 +118,61 @@
                        wind : "new wind text"
                    });
                 })
-                  
+                
                 app.touch('#pushWithBars',function(){
                     cobalt.navigate.push({
                         page: "nativeBars.html",
                         controller: "nativeBars",
                         bars: {
-                            visible: {
-                                top: true
-                            },
-                            backgroundColor: "#44FF44",
-                            color: "FFF",
-                            title: "Pushed",
-                            actions: [{
+                        visible: {
+                            top: true,
+                            bottom: true
+                        },
+                        backgroundColor: "#4444FF",
+                        color: "000",
+                        title: "Pushed",
+                        actions: [{
                                 name: "sun",
                                 title: "Sun !",
                                 androidPosition: "top",
                                 iosPosition: "topRight",
                                 androidIcon: "fr.cobaltians.cobaltcatalog:sun",
-                                iosIcon: "sun.png",
+                                iosIcon: "sun.png"
+                            },
+                            {
+                                name: "cloudy",
+                                title: "Clouds are coming",
+                                iosPosition: "bottom",
+                                androidPosition: "bottom",
+                                androidIcon: "fr.cobaltians.cobaltcatalog:cloudy",
+                                iosIcon: "cloudy.png"
                             }]
+                        }
+                    });
+                });
+                  
+                app.touch('#setBars',function(){
+                    cobalt.send({
+                        type: "ui",
+                        control: "bars",
+                        data: {
+                            action: "setBars",
+                            bars: {
+                                visible: {
+                                    top: true
+                                },
+                                backgroundColor: "#44FF44",
+                                color: "888",
+                                title: "Bars set",
+                                actions: [{
+                                    name: "sun",
+                                    title: "Sun !",
+                                    androidPosition: "top",
+                                    iosPosition: "topRight",
+                                    androidIcon: "fr.cobaltians.cobaltcatalog:sun",
+                                    iosIcon: "sun.png"
+                                }]
+                            }
                         }
                     });
                 });
