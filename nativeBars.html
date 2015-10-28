@@ -35,6 +35,8 @@
         <div class="block">
             <p>And set bars dynamically.</p>
             
+            <a href="javascript:;" id="setBarsVisible">Show bottom bar</a>
+            <a href="javascript:;" id="setBarContent">Set bar content</a>
             <a href="javascript:;" id="setBars">Set bars</a>
             <a href="javascript:;" id="pushWithBars">Push a page with bars</a>
         </div>
@@ -147,6 +149,34 @@
                                 androidIcon: "fr.cobaltians.cobaltcatalog:cloudy",
                                 iosIcon: "cloudy.png"
                             }]
+                        }
+                    });
+                });
+                
+                app.touch('#setBarsVisible',function(){
+                    cobalt.send({
+                        type: "ui",
+                        control: "bars",
+                        data: {
+                            action: "setBarsVisible",
+                            visible: {
+                                bottom: true
+                            }
+                        }
+                    });
+                });
+                
+                app.touch('#setBarContent',function(){
+                    cobalt.send({
+                        type: "ui",
+                        control: "bars",
+                        data: {
+                            action: "setBarContent",
+                            content: {
+                                backgroundColor: "#4444FF",
+                                color: "FFF",
+                                title: "Content set"
+                            }
                         }
                     });
                 });
