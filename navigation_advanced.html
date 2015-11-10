@@ -30,6 +30,11 @@
             <a id="modalWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Modal with data</a><br/>
         </div>
 
+        <div class="block">
+            <p>What if you need to push a page that will be the new root page of your app? That's the goal of a replace with the 'clearHistory' boolean. You won't be able to go back after this link.</p>
+            <a id="replaceWithReset" href="javascript:;">Replace with history reset</a><br/>
+        </div>
+
         <script type="text/javascript" src="js/zepto.min.js"></script>
         <script type="text/javascript" src="../platform/cobalt.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
@@ -77,6 +82,13 @@
                     cobalt.navigate.modal({
                         page : "navigation_pushedWithData.html",
                         data : { hip : "hop", you : "dont stop" }
+                    });
+                });
+
+                app.touch('#replaceWithReset',function(){
+                    cobalt.navigate.replace({
+                        page : "index.html",
+                        clearHistory : true
                     });
                 });
 
