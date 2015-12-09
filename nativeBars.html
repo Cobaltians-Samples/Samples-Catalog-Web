@@ -49,6 +49,21 @@
 
         <script>
             var badge = 0;
+            
+            var cloudyActionCfgs = [{
+                iosIcon: "cloudy.png",
+                color: "888888"
+            },
+            {
+                icon: "fa fa-bolt",
+                color: "FF0"
+            },
+            {
+                title: "Clouds are coming",
+                color: "000000"
+            }]
+            var cloudyActionCfgActive = undefined
+        
             var barLog = function(str){
                 $('#barLog').append(str+'<br/>');
             }
@@ -75,6 +90,31 @@
                             break;
                         case "cloudy":
                             barLog('Oh no, clouds again !');
+                            switch(cloudyActionCfgActive) {
+                            case 0:
+                                content = cloudyActionCfgs[1]
+                                cloudyActionCfgActive = 1
+                                break;
+                            case 1:
+                                content = cloudyActionCfgs[2]
+                                cloudyActionCfgActive = 2
+                                break;
+                            case 2:
+                            default:
+                                content = cloudyActionCfgs[0]
+                                cloudyActionCfgActive = 0
+                                break;
+                            }
+
+                            cobalt.send({
+                                type: "ui",
+                                control: "bars",
+                                data: {
+                                    action: "setActionContent",
+                                    name: item,
+                                    content: content
+                                }
+                            });
                             break;
                         case "moon":
                             barLog('Moon is the queen !');
