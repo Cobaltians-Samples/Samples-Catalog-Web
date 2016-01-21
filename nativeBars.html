@@ -37,6 +37,8 @@
             
             <a href="javascript:;" id="setBarsVisible">Show bottom bar</a>
             <a href="javascript:;" id="setBarContent">Set bar content</a>
+            <a href="javascript:;" id="showHideMoon">show/hide the moon</a>
+            <a href="javascript:;" id="enableDisableMoon">enable/disable the moon</a>
             <a href="javascript:;" id="setBars">Set bars</a>
             <a href="javascript:;" id="pushWithBars">Push a page with bars</a>
         </div>
@@ -48,6 +50,8 @@
 
 
         <script>
+            var visible = true;
+            var enabled = true;
             var badge = 0;
             
             var cloudyActionCfgs = [{
@@ -199,6 +203,32 @@
                                 androidIcon: "fr.cobaltians.cobaltcatalog:cloudy",
                                 iosIcon: "cloudy.png"
                             }]
+                        }
+                    });
+                });
+                  
+                app.touch('#showHideMoon',function(){
+                    visible = ! visible;
+                    cobalt.send({
+                        type: "ui",
+                        control: "bars",
+                        data: {
+                            action: "setActionVisible",
+                            name: "moon",
+                            visible: visible
+                        }
+                    });
+                });
+                  
+                app.touch('#enableDisableMoon',function(){
+                    enabled = ! enabled;
+                    cobalt.send({
+                        type: "ui",
+                        control: "bars",
+                        data: {
+                            action: "setActionEnabled",
+                            name: "moon",
+                            enabled: enabled
                         }
                     });
                 });
