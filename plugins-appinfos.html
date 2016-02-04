@@ -32,9 +32,7 @@
                 });
 
                 cobalt.getAppInfos(function(infos){
-                    //You received infos. It contains 'versionCode', 'versionNumber', and so on.
-                   cobalt.log('app version is :', infos);
-                   document.getElementById('locationField').innerHTML = JSON.stringify(infos);
+                   document.getElementById('locationField').innerHTML = JSON.stringify(infos, undefined, 2);
                 });
 
                 app.initPage('AppInfos Plugin');
