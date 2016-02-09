@@ -1,115 +1,209 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>	        
-    </head>
-    <body class="green">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="green">
 
-        <div class="block">
-            <p>Look at this pretty nav bar, fully Cobalt powered !</p>
+<div class="block">
+    <p>Look at this pretty nav bar, fully Cobalt powered !</p>
 
-            <p>Tap on bar buttons and watch below, buttons names should appears</p>
-        </div>
-        <div id="barLog" class="block" style="padding:5px; background:#CCC; min-height: 40px;">
+    <p>Tap on bar buttons and watch below, buttons names should appears</p>
+</div>
+<div id="barLog" class="block" style="padding:5px; background:#CCC; min-height: 40px;">
 
-        </div>
-        <div class="block">
-            <p>You can show/hide the bar and toggle button visibility too</p>
+</div>
+<div class="block">
+    <p>Bars actions</p>
+    <a href="javascript:;" id="setBarContent">Change bars parameters (title, colors)</a>
+    <a href="javascript:;" id="showFooter">Show bottom bar</a>
+    <a href="javascript:;" id="showHideBars">Change bars visibility</a>
+    <a href="javascript:;" id="setBars">Completely change bars</a>
+    <a href="javascript:;" id="pushWithBars">Push a new page with bars parameters</a>
+</div>
 
-            <a href="javascript:;" id="showHideBars">change native bars visibility</a>
-            <a href="javascript:;" class="showHideButton" data-button-name="moon">show/hide the moon</a>
-            <a href="javascript:;" class="showHideButton" data-button-name="sun">show/hide the sun</a>
-            <a href="javascript:;" class="showHideButton" data-button-name="wind">show/hide the wind</a>
-            <a href="javascript:;" class="showHideButton" data-button-name="cloudy">show/hide the clouds</a>
-            <a href="javascript:;" class="showHideButton" data-button-name="black_sun">show/hide the black sun</a>
-        </div>
+<div class="block">
+    <p>Buttons actions (here applyed on sun)</p>
 
-        <div class="block">
-            <p>You can also change titles</p>
+    <a href="javascript:;" class="showHideAction" data-button-name="sun">show/hide an action</a>
+    <a href="javascript:;" class="disbaleEnableAction" data-button-name="sun">disbale/enable an action</a>
+    <a href="javascript:;" id="increaseBadge">add/increase badge value</a>
+    <a href="javascript:;" id="changeActionContent">change action parameters</a>
 
-            <a href="javascript:;" id="changeTitles">change page title and wind title.</a>
-        </div>
-
-
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="../platform/cobalt.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+</div>
 
 
-        <script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="../platform/cobalt.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
-            var barLog = function(str){
-                $('#barLog').append(str+'<br/>');
+
+<script>
+    var badge = 0;
+
+    var barLog = function (str) {
+        $('#barLog').append(str + '<br/>');
+    };
+
+    Zepto(function ($) {
+
+        cobalt.init({
+            debug: app.debug,
+            debugInBrowser: app.debugInBrowser,
+            debugInDiv: false
+        });
+
+        cobalt.nativeBars.setEventListener(function (item, event) {
+            switch (item) {
+                case "black_sun":
+                    barLog("black sun");
+                    break;
+                case "cloudy":
+                    barLog('Oh no, clouds again!');
+                    break;
+                case "moon":
+                    barLog('Moon is the queen!');
+                    break;
+                case "sun":
+                    barLog("Sun is shining!");
+                    break;
+                case "wind":
+                    barLog('Wind !');
+                    break;
+                default :
+                    barLog('An unknown button has been pressed.');
+                    break;
             }
-            var visibilities = [
-                { top : true, bottom:true },
-                { top : false, bottom:true },
-                { top : false, bottom:false },
-                { top : true, bottom:false }
-            ]
-            var visibilitiesIndex=0;
+        });
 
-            Zepto(function($){
+        app.initPage('native bars');
 
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:false
-                });
 
-                cobalt.nativeBars.onBarButtonPressed({
-                    "black_sun":function(){
-                        barLog("black sun")
+        app.touch('#showFooter', function () {
+            cobalt.nativeBars.setBarsVisible({
+                bottom: true
+            });
+        });
+
+        app.touch('#setBarContent', function () {
+            cobalt.nativeBars.setBarContent({
+                backgroundColor: "#4444FF",
+                color: "FFF",
+                title: "Content set"
+            });
+        });
+
+        var visibilities = [
+            {top: false, bottom: true},
+            {top: false, bottom: false},
+            {top: true, bottom: false},
+            {top: true, bottom: true}
+        ];
+        var visibilitiesIndex = 0;
+
+        app.touch('#showHideBars', function () {
+            var newVisibility = visibilities[visibilitiesIndex];
+            cobalt.toast('setting bar visibility to ', newVisibility);
+            cobalt.nativeBars.setBarsVisible(newVisibility);
+            visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0;
+        });
+
+        app.touch('#pushWithBars', function () {
+            cobalt.navigate.push({
+                page: "nativeBars.html",
+                controller: "nativeBars",
+                bars: {
+                    visible: {
+                        top: true,
+                        bottom: true
                     },
-                    "cloudy":function(){
-                        barLog('Oh no, clouds again !')
-                    },
-                    "moon":function(){
-                        barLog('Moon is the queen !')
-                    },
-                    "sun":function(){
-                        barLog("Sun is the button's king !")
-                    },
-                    "wind":function(){
-                        barLog('Wind !')
+                    backgroundColor: "#4444FF",
+                    color: "000",
+                    title: "Pushed",
+                    actions: [
+                        {
+                            name: "sun",
+                            title: "Sun !",
+                            androidPosition: "top",
+                            iosPosition: "topRight",
+                            androidIcon: "sun",
+                            iosIcon: "sun.png",
+                            badge: ""
+                        },
+                        {
+                            name: "cloudy",
+                            title: "Clouds are coming",
+                            iosPosition: "bottom",
+                            androidPosition: "bottom",
+                            androidIcon: "cloudy",
+                            iosIcon: "cloudy.png"
+                        }
+                    ]
+                }
+            });
+        });
+
+        app.touch('#setBars', function () {
+            cobalt.send({
+                type: "ui",
+                control: "bars",
+                data: {
+                    action: "setBars",
+                    bars: {
+                        visible: {
+                            top: true
+                        },
+                        backgroundColor: "#44FF44",
+                        color: "888",
+                        title: "Bars set",
+                        actions: [{
+                            name: "sun",
+                            title: "Sun !",
+                            androidPosition: "top",
+                            iosPosition: "topRight",
+                            androidIcon: "sun",
+                            iosIcon: "sun.png",
+                            badge: ""
+                        }]
                     }
-                });
-
-                app.initPage('native bars');
-
-                app.touch('#showHideBars',function(){
-                    var newVisibility = visibilities[visibilitiesIndex];
-                    cobalt.toast('setting bar visibility to ', newVisibility);
-                    cobalt.nativeBars.setVisibility(newVisibility);
-                    visibilitiesIndex = ( visibilitiesIndex+1 < visibilities.length ) ? visibilitiesIndex+1 : 0;
-                })
-
-                app.touch('.showHideButton',function(){
-                    console.log($(this));
-                    var button = $(this).attr('data-button-name');
-                    if ($(this).hasClass('buttonShown')){
-                        cobalt.toast('hiding button');
-                        cobalt.nativeBars.hideButton(button);
-                        $(this).removeClass('buttonShown')
-                    }else{
-                        cobalt.toast('showing button');
-                        cobalt.nativeBars.showButton(button);
-                        $(this).addClass('buttonShown')
-                    }
-                })
-
-                app.touch('#changeTitles',function(){
-                   cobalt.nativeBars.setTexts({
-                       title : "new page title",
-                       wind : "new wind text"
-                   });
-                })
-            })
+                }
+            });
+        });
 
 
-        </script>
+        app.touch('.showHideAction', function () {
+            console.log($(this));
+            var button = $(this).attr('data-button-name');
+            var newValue = $(this).hasClass('buttonShown');
+            cobalt.toast((newValue ? 'showing' : 'hiding') + ' button ' + button);
+            cobalt.nativeBars.setActionVisible(button, newValue);
+            $(this).toggleClass('buttonShown');
+        });
 
-    </body>
+        app.touch('.disbaleEnableAction', function () {
+            console.log($(this));
+            var button = $(this).attr('data-button-name');
+            var newValue = $(this).hasClass('buttonEnabled');
+            cobalt.toast((newValue ? 'enabling' : 'disabling') + ' button ' + button);
+            cobalt.nativeBars.setActionEnabled(button, newValue);
+            $(this).toggleClass('buttonEnabled');
+        });
+
+        app.touch('#increaseBadge', function () {
+            //increment a counter
+            cobalt.nativeBars.setActionBadge('sun', count = (window.count || 0) + 1);
+        });
+
+        app.touch('#changeActionContent', function () {
+            cobalt.nativeBars.setActionContent('sun', {
+                "icon": "fa fa-heart",
+                "color": "#FF0000"
+            });
+        });
+
+    })
+</script>
+</body>
 </html>
