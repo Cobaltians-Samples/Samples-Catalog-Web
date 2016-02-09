@@ -105,7 +105,7 @@
 
         app.touch('#showHideBars', function () {
             var newVisibility = visibilities[visibilitiesIndex];
-            cobalt.toast('setting bar visibility to ', JSON.stringify(newVisibility));
+            cobalt.toast('setting bar visibility to ' + JSON.stringify(newVisibility));
             cobalt.nativeBars.setBarsVisible(newVisibility);
             visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0;
         });
