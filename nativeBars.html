@@ -57,10 +57,7 @@
 
         cobalt.nativeBars.setEventListener(function (item, event) {
             switch (item) {
-                case "black_sun":
-                    barLog("black sun");
-                    break;
-                case "cloudy":
+                case "cloud":
                     barLog('Oh no, clouds again!');
                     break;
                 case "moon":
@@ -122,6 +119,10 @@
                     backgroundColor: "#4444FF",
                     color: "000",
                     title: "Pushed",
+                    androidNavigationIcon: {
+                        enabled: true,
+                        icon: "fa fa-arrow-circle-left"
+                    },
                     actions: [
                         {
                             name: "sun",
