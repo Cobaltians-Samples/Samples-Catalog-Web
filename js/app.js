@@ -69,10 +69,23 @@ var app={
                 title : title
             });
         }
+        app.trackPageLoad();
 
     },
-
-
+    /* this function can help you tracking page loads */
+    trackPageLoad : function () {
+        var timeout = 5000;
+        var onDomModified = function() {
+            var log = window.cobalt && cobalt.log || window.console && console.log;
+            window.DOMLastModification = new Date();
+            clearTimeout(window.DOMTrackerTimer);
+            window.DOMTrackerTimer = setTimeout(function(){
+                log('PAGE LOADED AT', window.DOMLastModification)
+            },timeout)
+        };
+        $(document).bind("DOMSubtreeModified", onDomModified);
+        onDomModified();
+    },
     /* change font size on body. used in events demo page */
     setZoom : function(zoomLevel){
         try{
