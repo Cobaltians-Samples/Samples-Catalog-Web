@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>The network status should appear in the space below. Try toggling the ariplane mode or Wifi to see the plugin in action.</p>
+</div>
+<div class="block" style="max-width:100%; overflow:scroll;">
+    <p>Network status: <span id="networkStatus" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
+</div>
+<div class="block">
+    <a href="javascript:;" id="refreshStatus">Refresh status</a>
+    <a href="javascript:;" id="toggleMonitoring">Toggle monitoring (currently <span id="monitoring">off</span>)</a>
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="../platform/cobalt.js"></script>
+
+
+<script type="text/javascript" src="../NetworkStatusPlugin/cobalt.networkStatus.js"></script>
+<!--<script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>-->
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+
+    Zepto(function($) {
+        cobalt.init({
+            debug: app.debug,
+            debugInBrowser: app.debugInBrowser,
+            debugInDiv: app.debugInDiv
+        });
+
+        var statusDisplay = document.getElementById('networkStatus');
+
+        cobalt.networkStatus.getStatus(function (status) {
+            statusDisplay.innerHTML = status;
+        });
+        cobalt.networkStatus.onStatusChanged = function (status) {
+            statusDisplay.innerHTML = status;
+        };
+
+        var monitoring = false;
+
+        document.getElementById('toggleMonitoring').onclick = function () {
+            monitoring = !monitoring;
+
+            document.getElementById('monitoring').innerHTML = monitoring ? 'on' : 'off';
+
+            if (monitoring) {
+                cobalt.networkStatus.startMonitoring();
+            }
+            else {
+                cobalt.networkStatus.stopMonitoring();
+            }
+        };
+
+        document.getElementById('refreshStatus').onclick = function () {
+            cobalt.networkStatus.getStatus(function (status) {
+                statusDisplay.innerHTML = status;
+            });
+        };
+
+        app.initPage('NetworkStatus Plugin');
+    });
+
+</script>
+
+</body>
+</html>
