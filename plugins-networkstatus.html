@@ -8,14 +8,14 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>The network status should appear in the space below. Try toggling the ariplane mode or Wifi to see the plugin in action.</p>
+    <p>The network status should appear in the space below. Try toggling the airplane mode or Wifi to see the plugin in action.</p>
 </div>
 <div class="block" style="max-width:100%; overflow:scroll;">
-    <p>Network status: <span id="networkStatus" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
+    <p>Network status: <span id="statusDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
 </div>
 <div class="block">
     <a href="javascript:;" id="refreshStatus">Refresh status</a>
-    <a href="javascript:;" id="toggleMonitoring">Toggle monitoring (currently <span id="monitoring">off</span>)</a>
+    <a href="javascript:;" id="toggleMonitoring"><span id="monitoring" data-next-monitoring="off"></span> monitoring</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="../platform/cobalt.js"></script>
@@ -34,35 +34,39 @@
             debugInDiv: app.debugInDiv
         });
 
-        var statusDisplay = document.getElementById('networkStatus');
+        function displayStatus(status) {
+            $('#statusDisplay').html(status);
+        }
 
-        cobalt.networkStatus.getStatus(function (status) {
-            statusDisplay.innerHTML = status;
-        });
-        cobalt.networkStatus.onStatusChanged = function (status) {
-            statusDisplay.innerHTML = status;
-        };
-
-        var monitoring = false;
-
-        document.getElementById('toggleMonitoring').onclick = function () {
-            monitoring = !monitoring;
-
-            document.getElementById('monitoring').innerHTML = monitoring ? 'on' : 'off';
+        function toggleMonitoring() {
+            var monitoring = $('#monitoring').attr('data-next-monitoring') == 'on';
 
             if (monitoring) {
+                $('#monitoring').html('Stop').attr('data-next-monitoring', 'off');
                 cobalt.networkStatus.startMonitoring();
             }
             else {
+                $('#monitoring').html('Start').attr('data-next-monitoring', 'on');
                 cobalt.networkStatus.stopMonitoring();
             }
-        };
+        }
 
-        document.getElementById('refreshStatus').onclick = function () {
-            cobalt.networkStatus.getStatus(function (status) {
-                statusDisplay.innerHTML = status;
-            });
-        };
+        // Update monitoring button state at app startup
+        toggleMonitoring();
+
+        // Update status at app startup
+        cobalt.networkStatus.getStatus(displayStatus);
+
+        // Set monitoring callback
+        cobalt.networkStatus.onStatusChanged = displayStatus;
+
+        // Set monitoring button callback
+        app.touch('#toggleMonitoring', toggleMonitoring);
+
+        // Set refresh button callback
+        app.touch('#refreshStatus', function () {
+            cobalt.networkStatus.getStatus(displayStatus);
+        })
 
         app.initPage('NetworkStatus Plugin');
     });
