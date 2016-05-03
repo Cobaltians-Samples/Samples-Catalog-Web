@@ -8,14 +8,14 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>The battery status should appear in the space below. Try toggling the power saving mode to see the plugin in action.</p>
+    <p>The battery status should appear in the space below. After enabling battery state monitoring, try toggling the power saving mode to see the plugin in action.</p>
 </div>
 <div class="block" style="max-width:100%; overflow:scroll;">
-    <p>Network status: <span id="statusDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
+    <p>Battery state: <span id="stateDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
     <p>Battery level: <span id="levelDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
 </div>
 <div class="block">
-    <a href="javascript:;" id="refreshStatus">Refresh status and state</a>
+    <a href="javascript:;" id="refreshStatus">Refresh state and level</a>
     <a href="javascript:;" id="toggleMonitoring"><span id="monitoring" data-next-monitoring="off"></span> state monitoring</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
@@ -35,12 +35,17 @@
             debugInDiv: app.debugInDiv
         });
 
-        function displayState(status) {
-            $('#statusDisplay').html(status);
+        function displayState(state) {
+            $('#stateDisplay').html(state);
         }
 
         function displayLevel(level) {
-            $('#levelDisplay').html(level + '%');
+            if (level >= 0) {
+                $('#levelDisplay').html(level + '%');
+            }
+            else {
+                $('#levelDisplay').html('unknown');
+            }
         }
 
         function toggleMonitoring() {
@@ -77,7 +82,7 @@
             cobalt.batteryStatus.getLevel(displayLevel);
         });
 
-        app.initPage('NetworkStatus Plugin');
+        app.initPage('BatteryStatus Plugin');
     });
 
 </script>
