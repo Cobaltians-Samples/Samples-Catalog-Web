@@ -8,17 +8,18 @@
     <body class="theme_green">
 
         <div class="block">
-            <p>Below is a button to fetch images from Google using the native webservice&cache API. The first time you will use it it will have to wait until the server response. Next time, the data will already be in the storage so you will be able to have the cache result in instant.</p>
+            <p>Below is a button to fetch images from unsplash.it using the native webservice&cache API. The first time you will use it it will have to wait until the server responds. Next time, the data will already be in the storage so you will be able to have the cache result in an instant.</p>
 
             <a href="javascript:;" id="try">Ask webservice for images</a>
         </div>
 
+
         <div class="block">
-            <p>You can also use some processData to treat the data on the nativeSide if you want.</p>
+            <p>You can also use some processData to treat the data on the native side if you want. For example, pick random images from the cache storage.</p>
 
             <div style="display:flex;">
-            <a href="javascript:;" id="pngOnly" style="flex:1;">Filter png images</a>
-            <a href="javascript:;" id="jpgOnly" style="flex:1;">Filter jpg images</a>
+                <a href="javascript:;" id="pick5images" style="flex:1;">Pick 5 images</a>
+                <a href="javascript:;" id="pick10images" style="flex:1;">Pick 10 images</a>
             </div>
         </div>
 
@@ -45,107 +46,99 @@
 
         <script>
 
-            var pageLog = function(str){
-                $('#pageLog').append(str+'<br/>');
-            }
+            var pageLog = function (str) {
+                $('#pageLog').append(str + '<br/>');
+            };
 
-            var handleCacheResults = function(data, concernedCall){
-
-                if (data && data.responseData && data.responseData.results){
-                    pageLog('STORE SUCCESS : got '+data.responseData.results.length+' images from the WS storage');
-                    showResults(data.responseData.results);
-                }else{
-                    pageLog('STORE : Warning : got something in storage but that is NOT some google images');
+            var handleCacheResults = function (data, concernedCall) {
+                if (data && data.result) {
+                    pageLog('STORE SUCCESS : got ' + data.result.length + ' images from the WS storage');
+                    showResults(data.result);
                 }
-            }
-            var handleCacheErrors = function(error, concernedCall){
+                else {
+                    pageLog('STORE : Warning : got something in storage but that is NOT some images');
+                }
+            };
+
+            var handleCacheErrors = function (error, concernedCall) {
                 pageLog('STORE Error : ' + error);
-            }
-            var handleSuccess = function(data, concernedCall){
+            };
 
-                if (data && data.responseData && data.responseData.results){
-                    pageLog('SUCCESS : Google replied with '+data.responseData.results.length+' images');
-                    showResults(data.responseData.results);
-
-                }else{
-                    if (data && data.responseDetails){
-                        pageLog('SUCCESS : Call success but Google API error : '+data.responseDetails)
-                    }else{
-                        pageLog('ERROR : no answers from Google or data not parsed to json : '+ JSON.stringify(data))
-                    }
+            var handleSuccess = function (data, concernedCall) {
+                if (data && data.result) {
+                    pageLog('SUCCESS : Unsplash.it replied with ' + data.result.length + ' images');
+                    showResults(data.result);
                 }
-            }
-            var showResults = function(results){
-                var images="";
-                $.each(results,function(index,item){
-                    images+='<img src="'+item.url+'" width="300" height="200" /><br>';
-                });
-                $('#result').html(images)
-            }
+                else {
+                    pageLog('ERROR : no answer from unsplash.it or data not parsed to json : ' + JSON.stringify(data))
+                }
+            };
 
+            var showResults = function (results) {
+                var maxDisplay = Math.min(10, results.length);
+                var html = '<p>Displaying ' + maxDisplay + ' images out of ' + results.length + '</p>';
 
-            Zepto(function($){
+                for (var i = 0; i < maxDisplay; i++) {
+                    var item = results[i];
+                    html += '<img style="width:100%;" src="https://unsplash.it/256?image=' + item.id + '" /><br>';
+                }
+
+                $('#result').html(html);
+            };
+
+            Zepto(function ($) {
                 cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:false,
-
-                    plugins:{
-                        //equals to cobalt.ws.config()
+                    debug: app.debug,
+                    debugInBrowser: app.debugInBrowser,
+                    debugInDiv: false,
+                    plugins: {
+                        // Same as cobalt.ws.config()
                         webservices:{
-                            base:{
-                                url : "https://ajax.googleapis.com/ajax/services/search/"
+                            base: {
+                                url : "https://unsplash.it/"
                             },
-                            defaultParameters:{
-                                errorCallback : function( data, error, concernedCall ){
-                                    pageLog('WS error for call '+ concernedCall.callId + '. server response is '+ error )
+                            defaultParameters: {
+                                errorCallback : function(data, error, concernedCall) {
+                                    pageLog('WS error for call ' + concernedCall.callId + '. server response is ' +  error);
                                 }
                             }
                         }
-
                     }
                 });
 
-                app.initPage('Webservices Plugin')
+                app.initPage('Webservices Plugin');
 
-                app.touch('#try',function(){
-
+                app.touch('#try', function () {
                     $('#result').html();
                     cobalt.ws.call({
-                        url : "images",
-                        params:{
-                            v : "1.0",rsz : 8, q:"test",
-                            imgsz:"medium", start : 0
-                        },
-                        storageKey : "googleImages:0",
-                        successCallback : handleSuccess,
-                        cacheCallback : handleCacheResults
-                    })
-
+                        url: "list",
+                        arguments: {},
+                        storageKey: "unsplashImages:0",
+                        successCallback: handleSuccess,
+                        cacheCallback: handleCacheResults
+                    });
                 });
 
-                app.touch('#pngOnly',function(){
+                app.touch('#pick5images', function () {
                     $('#result').html();
                     cobalt.ws.call({
-                        storageKey : "googleImages:0",
-                        processData : { ext : "png"}, //optionnal native side filtering/sorting
-                        cacheCallback : handleCacheResults,
-                        cacheError : handleCacheErrors
+                        storageKey: "unsplashImages:0",
+                        processData: { "count" : 5 }, // Optional native side filtering / sorting
+                        cacheCallback: handleCacheResults,
+                        cacheError: handleCacheErrors
                     })
                 });
 
-                app.touch('#jpgOnly',function(){
+                app.touch('#pick10images', function () {
                     $('#result').html();
                     cobalt.ws.call({
-                        storageKey : "googleImages:0",
-                        processData : { ext : "jpg"}, //ooptionnal native side filtering/sorting
-                        cacheCallback : handleCacheResults,
-                        cacheError : handleCacheErrors
-                    })
+                        storageKey: "unsplashImages:0",
+                        processData: { "count": 10 }, // Optional native side filtering / sorting
+                        cacheCallback: handleCacheResults,
+                        cacheError: handleCacheErrors
+                    });
                 });
-
-
-            })
+            });
 
         </script>
 
