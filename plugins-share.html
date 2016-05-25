@@ -37,43 +37,43 @@
 
         // Share bindings
         app.touch('#shareRemoteImage', function () {
-          var imageData = [{
+          var imageData = {
             'type': 'image',
             'source': 'url',
             'path': 'http://cobaltians.org/blog/wp-content/themes/kichu/images/logo_menu.png',
             'title': 'Cobalt Logo',
             'detail': "From url by the Catalog sample at github.com/Cobaltians"
-          }];
-            cobalt.share({data : imageData});
+          };
+            cobalt.share(imageData);
         });
 
         app.touch('#shareLocalImage', function () {
-          var imageData = [{
+          var imageData = {
             'type': 'image',
             'source': 'local',
             'path': 'www/files/logo.png',
             'title': 'Cobalt Logo',
             'detail': "From the assets of Catalog sample at github.com/Cobaltians"
-          }];
-            cobalt.share({data : imageData});
+          };
+            cobalt.share(imageData);
         });
 
         app.touch('#shareContact', function () {
-          var contactData = [{
+          var contactData = {
             'type': 'contact',
             'name': 'Cobaltians Assembly',
             'email': 'contact@cobaltians.org',
             'company': 'Cobaltians.org'
-          }];
-          cobalt.share({data : contactData});
+          };
+          cobalt.share(contactData);
         });
 
         app.touch('#shareText', function () {
-          var textData = [{
+          var textData = {
             'type': 'text',
             'content': "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-          }];
-            cobalt.share({data : textData});
+          };
+            cobalt.share(textData);
         });
 
         app.initPage('Share Plugin');
