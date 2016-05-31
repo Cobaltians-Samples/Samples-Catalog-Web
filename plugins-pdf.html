@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>Click on this PDF button to preview a sample pdf.</p>
+</div>
+<div class="block">
+    <a href="javascript:;" id="openPdf">Preview Sample PDF</a>
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="../platform/cobalt.js"></script>
+
+
+<script type="text/javascript" src="../PdfPlugin/cobalt.pdf.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+
+    Zepto(function($) {
+        cobalt.init({
+            debug: app.debug,
+            debugInBrowser: app.debugInBrowser,
+            debugInDiv: app.debugInDiv
+        });
+
+        // Share bindings
+        app.touch('#openPdf', function () {
+          var pdf = {
+            'source': 'url',
+            'path': 'http://cobaltians.org/unicorn_for_catalog_sample.pdf',
+          };
+            cobalt.openpdf(pdf);
+        });
+
+        app.initPage('Share Plugin');
+    });
+
+</script>
+
+</body>
+</html>
