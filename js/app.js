@@ -46,10 +46,7 @@ var app={
             }
         });
         app.touch('a.pop',function(){
-            cobalt.navigate.pop();
-        });
-        app.touch('a.popTo',function(){
-            cobalt.navigate.popTo({
+            cobalt.navigate.pop({
                 page : $(this).attr('data-href'),
                 controller : $(this).attr('data-classid')
             });

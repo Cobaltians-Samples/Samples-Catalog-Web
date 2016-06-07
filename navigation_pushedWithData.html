@@ -56,7 +56,7 @@
                 app.initPage('advanced navigation');
 
                 app.touch('#popWithData',function(){
-                    cobalt.navigate.pop({ ho : "yeah" });
+                    cobalt.navigate.pop({ data : { ho : "yeah" }});
                 });
 
                 app.touch('#dismissWithData',function(){
