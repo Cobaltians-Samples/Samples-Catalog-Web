@@ -41,8 +41,8 @@
         <p>Last received location: </p><pre id="locationField">No location received yet</pre>
     </div>
     <div class="block">
-        <input id="mode" type="checkbox" style="width:auto;" checked><label for="mode">Use filter mode</label>
-        <input id="interval" type="number" placeholder="Updates interval (milliseconds, default 500)">
+        <!--<input id="mode" type="checkbox" style="width:auto;" checked><label for="mode">Use filter mode</label>
+        <input id="interval" type="number" placeholder="Updates interval (milliseconds, default 500)">-->
         <input id="accuracy" type="number" placeholder="Accuracy (meters, default 100)">
         <input id="age" type="number" placeholder="Max age (milliseconds, default 120000)">
         <input id="timeout" type="number" placeholder="Timeout (milliseconds, default no timeout)">
@@ -75,13 +75,15 @@
             });
 
             app.touch('#getLocation', function () {
-                var mode = $('#mode').prop('checked') ? 'filter' : 'all';
+                //var mode = $('#mode').prop('checked') ? 'filter' : 'all';
+                var mode = 'filter';
 
                 var accuracy = parseInt($('#accuracy').val());
                 if (isNaN(accuracy) || accuracy <= 0) accuracy = 100;
 
-                var interval = parseInt($('#interval').val());
-                if (isNaN(interval) || interval <= 0) interval = 500;
+                //var interval = parseInt($('#interval').val());
+                //if (isNaN(interval) || interval <= 0) interval = 500;
+		var interval = 500;
 
                 var age = parseInt($('#age').val());
                 if (isNaN(age) || age <= 0) age = 120000;
