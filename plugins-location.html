@@ -1,57 +1,131 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    </head>
-    <body class="theme_green">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 
-        <div class="block">
-            <p>Your location should appears in the space bellow. If not, check you correctly installed the plugin, check you device setting or the device logs for any clues.</p>
-        </div>
-        <div class="block">
-            <p>Your location is : <b id="locationField" style="border:1px solid #ccc; padding:5px;">[waiting for plugin...]</b></p>
+    <style>
+        input[type="number"] {
+            padding: 10px;
+            margin: 5px 5px 0 5px;
+            border: 1px solid #ccc;
+            display: block;
+            width: calc(100% - 10px);
+            box-sizing: border-box;
+        }
 
-        </div>
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="../platform/cobalt.js"></script>
+        input[type="checkbox"] {
+            margin: 10px;
+        }
 
+        pre {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
 
-        <script type="text/javascript" src="../LocationPlugin/cobalt.location.js"></script>
-        <script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+        #mode:checked ~ #interval {
+            display: none;
+        }
+    </style>
+</head>
+<body class="theme_green">
 
-        <script>
+    <div class="block">
+        <p>Use the controls below to query the location. You can specify the needed accuracy, the recency threshold and a timeout.</p>
+    </div>
+    <div class="block">
+        <p>Last received location: </p><pre id="locationField">No location received yet</pre>
+    </div>
+    <div class="block">
+        <!--<input id="mode" type="checkbox" style="width:auto;" checked><label for="mode">Use filter mode</label>
+        <input id="interval" type="number" placeholder="Updates interval (milliseconds, default 500)">-->
+        <input id="accuracy" type="number" placeholder="Accuracy (meters, default 100)">
+        <input id="age" type="number" placeholder="Max age (milliseconds, default 120000)">
+        <input id="timeout" type="number" placeholder="Timeout (milliseconds, default no timeout)">
+        <a href="javascript:" id="getLocation">Get location</a>
+    </div>
+    <div class="block">
+        <p>Logs:</p><pre id="logs"></pre>
+    </div>
+    <iframe id="map" frameborder="0" style="border:0; width:100%; height:300px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFoim6wPEDzDPb_cYCAwNs54xGsg4-9Dk&q=Lannion" allowfullscreen></iframe>
 
-            Zepto(function($){
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv,
-                    plugins:{
-                        location:{
-                            foo : "bar",
-                            onError:function(code, text){
-                                if (! text){
-                                    text = "No location found (may be user settings)"
-                                }
-                                document.getElementById('locationField').innerHTML=text;
-                            }
-                        }
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="../platform/cobalt.js"></script>
+
+    <script type="text/javascript" src="../LocationPlugin/cobalt.location.js"></script>
+    <script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script>
+        Zepto(function ($) {
+            cobalt.init({
+                debug: app.debug,
+                debugInBrowser: app.debugInBrowser,
+                debugInDiv: app.debugInDiv,
+                events: {
+                    'onBackButtonPressed': function (data, callback) {
+                        cobalt.location.stop();
+                        cobalt.sendCallback(callback, { value: true });
                     }
-                });
+                }
+            });
 
-                cobalt.getLocation(function(position){
-                    document.getElementById('locationField').innerHTML = JSON.stringify(position);
-                })
+            app.touch('#getLocation', function () {
+                //var mode = $('#mode').prop('checked') ? 'filter' : 'all';
+                var mode = 'filter';
+
+                var accuracy = parseInt($('#accuracy').val());
+                if (isNaN(accuracy) || accuracy <= 0) accuracy = 100;
+
+                //var interval = parseInt($('#interval').val());
+                //if (isNaN(interval) || interval <= 0) interval = 500;
+		var interval = 500;
+
+                var age = parseInt($('#age').val());
+                if (isNaN(age) || age <= 0) age = 120000;
+
+                var timeout = parseInt($('#timeout').val());
+                if (isNaN(timeout) || timeout < 0) timeout = undefined;
+
+                var options = {
+                    'mode': mode,
+                    'accuracy': accuracy,
+                    'interval': interval,
+                    'age': age,
+                    'timeout': timeout
+                };
+
+                cobalt.location.start(options);
+            });
+
+            cobalt.location.onLocationChanged = function (data) {
+                var html = 'Longitude: ' + data.longitude + '\n';
+                html += 'Latitude: ' + data.latitude + '\n';
+                html += 'Accuracy: ' + data.accuracy + '\n';
+                html += 'Timestamp: &zwnj;' + data.timestamp;
+                $('#locationField').html(html);
+
+                $('#map').prop('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBFoim6wPEDzDPb_cYCAwNs54xGsg4-9Dk&q=' + data.latitude + ',' + data.longitude);
 
 
-                app.initPage('Location Plugin')
+                log('Received location');
+            };
 
-            })
+            cobalt.location.onStatusChanged = function (data) {
+                log('Received status: ' + data.status);
+            }
 
-        </script>
+            function log(message) {
+                var date = new Date();
+                $('#logs').prepend('[' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '] ' + message + '\n');
+            }
 
-    </body>
+            app.initPage('Location Plugin');
+        });
+    </script>
+</body>
 </html>
