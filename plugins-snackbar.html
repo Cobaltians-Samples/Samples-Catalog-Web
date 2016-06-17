@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <style>
+            input[type="text"],
+            select {
+                padding: 10px;
+                margin: 5px 5px 0 5px;
+                border: 1px solid #ccc;
+                display: block;
+                width: calc(100% - 10px);
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body class="theme_green">
+
+        <div class="block">
+            <input id="text" type="text" placeholder="Text" value="Snackbar text">
+            <select id="duration" placeholder="Duration">
+                <option value="-1" checked>Short</option>
+                <option value="0">Long</option>
+                <option value="-2">Infinite</option>
+            </select>
+            <input id="action" type="text" placeholder="Action text (leave empty for no action)">
+            <input id="color" type="text" placeholder="Action color (#FFFFFF format)">
+        </div>
+
+        <div class="block">
+            <a href="javascript:" id="snack">Make snackbar</a>
+        </div>
+
+        <script type="text/javascript" src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="../platform/cobalt.js"></script>
+
+        <script type="text/javascript" src="../SnackbarPlugin/cobalt.snackbar.js"></script>
+        <script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+
+        <script>
+
+            Zepto(function ($) {
+                cobalt.init({
+                    debug: app.debug,
+                    debugInBrowser: app.debugInBrowser,
+                    debugInDiv: app.debugInDiv
+                });
+
+                app.touch('#snack', function () {
+                    cobalt.snackbar.show({
+                        text: $('#text').val(),
+                        duration: $('#duration').val(),
+                        button: $('#action').val(),
+                        buttonColor: $('#color').val(),
+                        callback: function () {
+                            cobalt.toast('Action triggered!');
+                        }
+                    });
+                });
+
+                app.initPage('Snackbar Plugin');
+            });
+
+        </script>
+
+    </body>
+</html>
+
