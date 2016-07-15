@@ -124,7 +124,7 @@
 
         app.touch('#changeStatusBar', function () {
             var conf = statusBarsConfs[statusBarsConfsIndex];
-            cobalt.toast('setting statusBar to ' + JSON.stringify(statusBarsConfs));
+            cobalt.toast('setting statusBar to ' + JSON.stringify(conf));
             cobalt.statusBar.set(conf);
             statusBarsConfsIndex = ( statusBarsConfsIndex + 1 < statusBarsConfs.length ) ? statusBarsConfsIndex + 1 : 0; //loop index
         });
