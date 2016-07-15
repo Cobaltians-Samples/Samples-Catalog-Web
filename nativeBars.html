@@ -31,7 +31,14 @@
     <a href="javascript:;" class="disbaleEnableAction" data-button-name="sun">disbale/enable an action</a>
     <a href="javascript:;" id="increaseBadge">add/increase badge value</a>
     <a href="javascript:;" id="changeActionContent">change action parameters</a>
+</div>
+<div class="block">
+    <p>Status bar<br/>
+        Status bar inherits from nativeBars colors. You should have seen statusBar color changes when you used buttons above.</p>
 
+    <a href="javascript:;" class="push" data-href="simple_page.html" data-classid="dark">It also depends on webview backgroundColor</a>
+    <a href="javascript:;" id="changeStatusBar">Changes dynamically from the JS</a>
+    <a href="javascript:;" id="pushWithNoStatusBar">Push with statusBar example (visible=false)</a>
 </div>
 
 
@@ -104,7 +111,22 @@
             var newVisibility = visibilities[visibilitiesIndex];
             cobalt.toast('setting bar visibility to ' + JSON.stringify(newVisibility));
             cobalt.nativeBars.setBarsVisible(newVisibility);
-            visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0;
+            visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0; //loop index
+        });
+
+        var statusBarsConfs = [
+            {visible: false},
+            {visible: true, lightText:true},
+            {visible: false},
+            {visible: true, lightText:false}
+        ];
+        var statusBarsConfsIndex = 0;
+
+        app.touch('#changeStatusBar', function () {
+            var conf = statusBarsConfs[statusBarsConfsIndex];
+            cobalt.toast('setting statusBar to ' + JSON.stringify(statusBarsConfs));
+            cobalt.statusBar.set(conf);
+            statusBarsConfsIndex = ( statusBarsConfsIndex + 1 < statusBarsConfs.length ) ? statusBarsConfsIndex + 1 : 0; //loop index
         });
 
         app.touch('#pushWithBars', function () {
@@ -143,6 +165,14 @@
                         }
                     ]
                 }
+            });
+        });
+
+        app.touch('#pushWithNoStatusBar', function () {
+            cobalt.navigate.push({
+                page: "simple_page.html",
+                controller: "default",
+                statusBar:{ visible:false }
             });
         });
 
