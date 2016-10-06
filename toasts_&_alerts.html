@@ -17,7 +17,7 @@
             <a href="javascript:;" id="toastB">basic toast</a>
             <a href="javascript:;" id="toastC">loooonnnnng toast</a>
             <a href="javascript:;" id="toastD">A toast with multiple lines using \n</a>
-            <a href="javascript:;" id="toastE">20 toasts in a row! boom!</a>
+            <a href="javascript:;" id="toastE">5 toasts in a row! boom!</a>
         </div>
         <div class="block">
             <h2>Alerts</h2>
@@ -74,7 +74,7 @@
                     return false;
                 });
                 app.touch('#toastE',function(){
-                    for (var i=1; i<=20; i++){
+                    for (var i=1; i<=5; i++){
                         cobalt.toast("toast #"+ i)
                     }
                     return false;
