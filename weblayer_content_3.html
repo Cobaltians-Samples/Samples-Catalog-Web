@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="webLayer">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body style="background: rgba(219,164,91,0.45)">
+
+<div class="webLayer">
+    <div class="block">
+        <p>This weblayer has a coloured background. If you send it to background, you should see him behind the main view (we added opacity:0 to the main view)</p>
+        <a href="javascript:;" id="sendToBack">Send to background</a>
+        <a href="javascript:;" id="close">Close</a>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="../platform/cobalt.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+
+<script>
+
+  Zepto(function($){
+
+    cobalt.init({
+      debug:app.debug,
+      debugInBrowser:app.debugInBrowser,
+      debugInDiv:app.debugInDiv
+    });
+
+    app.touch('#sendToBack',function(){
+      cobalt.webLayer.sendToBack();
+    });
+
+    app.touch('#close',function(){
+      cobalt.webLayer.dismiss();
+    });
+
+    app.initPage();
+
+  })
+</script>
+
+</body>
+</html>

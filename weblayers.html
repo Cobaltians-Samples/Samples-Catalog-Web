@@ -30,6 +30,20 @@
 
             <a href="javascript:;" id="test4">Try it</a>
         </div>
+		<div class="block">
+            <p>This weblayer loads a distant page on the cobaltians server. In this page we load cobalt.js so we can use as if it was in the app.</p>
+
+            <a href="javascript:;" id="test5">Distant one</a>
+        </div>
+		
+		<div class="block">
+            <p>Weblayers can also be put in foreground and background. Clic on show below and then move the weblayer background and foreground with proposed buttons.</p>
+
+            <a href="javascript:;" id="test6">Show</a>
+			<a href="javascript:;" id="test7">Move foreground</a> 
+			<a href="javascript:;" id="test8">Dismiss</a> 
+        </div>
+		
         <script type="text/javascript" src="js/zepto.min.js"></script>
         <script type="text/javascript" src="../platform/cobalt.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
@@ -57,19 +71,30 @@
                 });
 
                 app.touch('#test1',function(){
-                    cobalt.webLayer("show","weblayer_content_1.html");
+                    cobalt.webLayer.show("weblayer_content_1.html");
                 });
                 app.touch('#test2',function(){
-                    cobalt.webLayer("show","weblayer_content_1.html",1.2);
+                    cobalt.webLayer.show("weblayer_content_1.html",1.2);
                 });
                 app.touch('#test3',function(){
-                    cobalt.webLayer("show","weblayer_content_1.html",0);
+                    cobalt.webLayer.show("weblayer_content_1.html",0);
                 });
                 app.touch('#test4',function(){
-                    cobalt.webLayer("show","weblayer_content_2.html");
+                    cobalt.webLayer.show("weblayer_content_2.html");
                 });
-
-
+                app.touch('#test5',function(){
+                    cobalt.webLayer.show("http://cobaltians.org/test_distantCobaltView/index.html");
+                });
+				
+                app.touch('#test6',function(){
+                    cobalt.webLayer.show("weblayer_content_3");
+                });
+                app.touch('#test7',function(){
+                    cobalt.webLayer.bringToFront();
+                });
+                app.touch('#test8',function(){
+                    cobalt.webLayer.dismiss();
+                });
                 app.initPage("Web layers");
 
             })

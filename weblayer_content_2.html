@@ -40,7 +40,7 @@
 
                 app.touch('#close',function(){
                     $('#text').blur();
-                    cobalt.webLayer("dismiss",{ value : $('#text').val() });
+                    cobalt.webLayer.dismiss({ value : $('#text').val() });
                 });
 
                 app.initPage();
