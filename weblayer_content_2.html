@@ -18,7 +18,7 @@
 
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="../platform/cobalt.js"></script>
+        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
 
 
@@ -32,16 +32,15 @@
                     debugInDiv:app.debugInDiv
                 });
 
-                //This won't work everywhere. we work on it. see https://github.com/cobaltians/cobalt/issues/9 for more.
                 setTimeout(function(){
                     $('#text').focus();
-                },200);
+                },350);
 
 
 
                 app.touch('#close',function(){
                     $('#text').blur();
-                    cobalt.webLayer("dismiss",{ value : $('#text').val() });
+                    cobalt.webLayer.dismiss({ value : $('#text').val() });
                 });
 
                 app.initPage();

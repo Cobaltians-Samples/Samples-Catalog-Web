@@ -8,6 +8,28 @@
     <body class="green">
 
         <div class="block">
+            <p>Pushing a simple page</p>
+            <a class="push" href="javascript:;" data-href="simple_page.html">A simple page</a>
+
+            <p>A simple page with dark background</p>
+            <a class="push" href="javascript:;" data-href="simple_page.html" data-classid="dark">Dark simple page</a>
+        </div>
+
+        <div class="block">
+            <p>You can also have modals or weblayers</p>
+            <a class="push" href="javascript:;" data-href="modals.html" data-classid="modalTest">Modals</a>
+            <a class="push" href="javascript:;" data-href="weblayers.html">WebLayers</a>
+        </div>
+
+        <div class="block">
+            <p>Sometimes, you will have to give data to the next or the previous page. This link does just that.</p>
+            <a id="pushWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Push with data</a><br/>
+
+            <p>Same thing with a modal.</p>
+            <a id="modalWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Modal with data</a><br/>
+        </div>
+
+        <div class="block">
             <p>Replacing the current view with an other one, without touching to the history, can be useful in some cases. For example, separating a form in multiple pages, as an alternative to modals, or for a side menu feature.</p>
 
             <p>Here you can see it in action. Buttons bellow will replace the current view with another one.</p>
@@ -22,13 +44,7 @@
             <a class="push" href="javascript:;" data-href="navigation_popToController.html">navPopTo</a>
         </div>
 
-        <div class="block">
-            <p>Sometimes, you will have to give data to the next or the previous page. This link does just that.</p>
-            <a id="pushWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Push with data</a><br/>
 
-            <p>Same thing with a modal.</p>
-            <a id="modalWithData" href="javascript:;" data-href="navigation_pushedWithData.html">Modal with data</a><br/>
-        </div>
 
         <div class="block">
             <p>What if you need to push a page that will be the new root page of your app? That's the goal of a replace with the 'clearHistory' boolean. You won't be able to go back after this link.</p>
@@ -36,7 +52,7 @@
         </div>
 
         <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="../platform/cobalt.js"></script>
+        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
 
 
@@ -61,7 +77,7 @@
                     }
                 });
 
-                app.initPage('advanced navigation');
+                app.initPage('Advanced navigation');
 
                 app.touch('a.replace',function(){
                     cobalt.navigate.replace({
