@@ -12,6 +12,9 @@
         <p>This weblayer has a coloured background. If you send it to background, you should see him behind the main view (we added opacity:0 to the main view)</p>
         <a href="javascript:;" id="sendToBack">Send to background</a>
         <a href="javascript:;" id="close">Close</a>
+        <a href="javascript:;" id="test9">Subscribe to pubsub</a>
+        <a href="javascript:;" id="test10">Publish to pubsub</a>
+        <a href="javascript:;" id="test11">Unsubscribe to pubsub</a>
     </div>
 
 </div>
@@ -20,6 +23,7 @@
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="../platform/cobalt.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="../PubSubPlugin/cobalt.pubsub.js"></script>
 
 
 <script>
@@ -38,6 +42,18 @@
 
     app.touch('#close',function(){
       cobalt.webLayer.dismiss();
+    });
+
+    app.touch('#test9',function(){
+      cobalt.subscribe('wl', function(data){
+        cobalt.log('weblayer webview received', data);
+      })
+    });
+    app.touch('#test10',function(){
+      cobalt.publish('wl', {'hip':'hop'});
+    });
+    app.touch('#test11',function(){
+      cobalt.unsubscribe('wl')
     });
 
     app.initPage();
