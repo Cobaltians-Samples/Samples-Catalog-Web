@@ -64,16 +64,13 @@
 
   Zepto(function($) {
 
-    cobalt.init({
-      events: {
-        onPageShown: function(data) {
-          if (data) {
-            cobalt.alert({
-              title: 'Some data where sent to the page',
-              message: JSON.stringify(data)
-            });
-          }
-        }
+    cobalt.init();
+    cobalt.subscribe('cobalt:onPageShown',function(data) {
+      if (data) {
+        cobalt.alert({
+          title: 'Some data where sent to the page',
+          message: JSON.stringify(data)
+        });
       }
     });
 

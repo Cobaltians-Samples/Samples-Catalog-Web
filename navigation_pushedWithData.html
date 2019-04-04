@@ -35,18 +35,16 @@
 
   Zepto(function($) {
 
-    cobalt.init({
-      events: {
-        onPageShown: function(data) {
-          if (data) {
-            cobalt.alert({
-              title: 'Some data where sent to the page',
-              message: JSON.stringify(data)
-            });
-          } else {
-            cobalt.toast('no data where sent to the page');
-          }
-        }
+    cobalt.init();
+
+    cobalt.subscribe('cobalt:onPageShown', function(data){
+      if (data) {
+        cobalt.alert({
+          title: 'Some data where sent to the page',
+          message: JSON.stringify(data)
+        });
+      } else {
+        cobalt.toast('no data where sent to the page');
       }
     });
 

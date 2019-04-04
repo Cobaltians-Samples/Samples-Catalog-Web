@@ -61,19 +61,18 @@
 
   Zepto(function($) {
 
-    cobalt.init({
-      events: {
-        "onWebLayerDismissed": function(data, callback) {
-          if (data && data.page == "weblayer_content_2.html") {
+    cobalt.init();
 
-            cobalt.toast('webLayer ' + data.page + ' closed')
-            if (data.data) {
-              cobalt.toast('webLayer result is ' + JSON.stringify(data.data))
-            }
-          }
+    cobalt.subscribe('cobalt:onWebLayerDismissed', function(data){
+      if (data && data.page === "weblayer_content_2.html") {
+
+        cobalt.toast('webLayer ' + data.page + ' closed')
+        if (data.data) {
+          cobalt.toast('webLayer result is ' + JSON.stringify(data.data))
         }
       }
     });
+
 
     app.touch('#test1', function() {
       cobalt.webLayer.show("weblayer_content_1.html");

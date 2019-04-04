@@ -68,13 +68,11 @@
 
 <script>
   Zepto(function($) {
-    cobalt.init({
-      events: {
-        'onBackButtonPressed': function(data, callback) {
-          cobalt.location.stop();
-          cobalt.sendCallback(callback, {value: true});
-        }
-      }
+
+    cobalt.init();
+    cobalt.subscribe('cobalt:onBackButtonPressed', function(){
+      cobalt.location.stop();
+      cobalt.backButtonPressed.allow();
     });
 
     app.touch('#getLocation', function() {

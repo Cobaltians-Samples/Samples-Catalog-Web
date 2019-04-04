@@ -31,13 +31,11 @@
 
   Zepto(function($) {
 
-    cobalt.init({
-      events: {
-        "pullToRefresh": function(data, callback) {
-          cobalt.toast('reloading B.')
-          cobalt.sendCallback(callback)
-        }
-      }
+    cobalt.init();
+
+    cobalt.subscribe('cobalt:onPullToRefresh', function(){
+      cobalt.toast('reloading B.');
+      cobalt.pullToRefresh.dismiss();
     });
 
     app.initPage('PopTo, Page B');

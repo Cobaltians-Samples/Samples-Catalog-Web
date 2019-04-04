@@ -48,18 +48,16 @@
 
   Zepto(function($) {
 
-    cobalt.init({
-      events: {
-        "infiniteScroll": function(data, callback) {
-          cobalt.log('native asked to load more content');
-          $('#loading').show();
-          setTimeout(function() {
-            $('#loading').hide();
-            $('#list').append(someListItems);
-            cobalt.sendCallback(callback);
-          }, 1000, true);
-        }
-      }
+    cobalt.init();
+
+    cobalt.subscribe('cobalt:onInfiniteScroll', function(){
+      cobalt.log('native asked to load more content');
+      $('#loading').show();
+      setTimeout(function() {
+        $('#loading').hide();
+        $('#list').append(someListItems);
+        cobalt.infiniteScroll.dismiss();
+      }, 1000, true);
     });
 
     app.initPage('Infinite Scroll');

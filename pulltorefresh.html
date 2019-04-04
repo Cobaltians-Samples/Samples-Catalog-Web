@@ -55,24 +55,20 @@
   }
 
   Zepto(function($) {
-    cobalt.init({
-      events: {
-        "pullToRefresh": function(data, calllback) {
-          cobalt.log('native asked to refresh');
-          $('#list').html('')
 
-          cobalt.log('Faking loading something');
+    cobalt.init();
+    cobalt.subscribe('cobalt:onPullToRefresh', function(){
+      cobalt.log('native asked to refresh');
+      $('#list').html('')
+      cobalt.log('Faking loading something');
 
-          setTimeout(function() {
-            cobalt.log('We have new data');
-            fillWithListItems();
+      setTimeout(function() {
+        cobalt.log('We have new data');
+        fillWithListItems();
 
-            cobalt.log('Releasing the pullToRefresh');
-            cobalt.sendCallback(calllback);
-          }, 1000, true);
-        }
-
-      }
+        cobalt.log('Releasing the pullToRefresh');
+        cobalt.pullToRefresh.dismiss();
+      }, 1000, true);
     });
 
 
