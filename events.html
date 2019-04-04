@@ -36,10 +36,6 @@
             Zepto(function($){
 
                 cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv,
-
                     events:{
                         "setZoom":function(data, callback){
                             cobalt.log('received setZoom at '+new Date().getTime())

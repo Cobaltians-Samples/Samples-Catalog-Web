@@ -53,12 +53,7 @@
 
             Zepto(function($){
 
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv
-
-                });
+                cobalt.init();
 
                 cobalt.log("init testLocalStorageKey : "+cobalt.storage.get("testLocalStorageKey"));
 

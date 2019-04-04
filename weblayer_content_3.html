@@ -30,11 +30,7 @@
 
   Zepto(function($){
 
-    cobalt.init({
-      debug:app.debug,
-      debugInBrowser:app.debugInBrowser,
-      debugInDiv:app.debugInDiv
-    });
+    cobalt.init();
 
     app.touch('#sendToBack',function(){
       cobalt.webLayer.sendToBack();

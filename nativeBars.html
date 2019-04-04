@@ -49,11 +49,7 @@
 
     Zepto(function ($) {
 
-        cobalt.init({
-            debug: app.debug,
-            debugInBrowser: app.debugInBrowser,
-            debugInDiv: false
-        });
+        cobalt.init();
 
         cobalt.nativeBars.setEventListener(function (item, event) {
             switch (item) {

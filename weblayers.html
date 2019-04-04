@@ -57,10 +57,6 @@
             Zepto(function($){
 
                 cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv,
-
                     events:{
                         "onWebLayerDismissed":function(data, callback){
                             if (data && data.page=="weblayer_content_2.html"){

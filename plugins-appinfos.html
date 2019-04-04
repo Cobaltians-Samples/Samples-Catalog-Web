@@ -25,11 +25,7 @@
 <script>
 
     Zepto(function($){
-        cobalt.init({
-            debug:app.debug,
-            debugInBrowser:app.debugInBrowser,
-            debugInDiv:app.debugInDiv
-        });
+        cobalt.init();
 
         cobalt.getAppInfos(function(infos){
             document.getElementById('locationField').innerHTML = '<pre>'+JSON.stringify(infos, null, 2)+'</pre>';

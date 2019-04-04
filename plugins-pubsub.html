@@ -66,11 +66,7 @@
 
             Zepto(function($){
 
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:false
-                });
+                cobalt.init();
                 app.initPage('PubSub Plugin')
 
                 $('#publish_myChannel').on('click',function(){

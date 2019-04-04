@@ -30,11 +30,8 @@
 
 <script>
             Zepto(function($){
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv
-                });
+                cobalt.init();
+
                 app.touch('#choice',function(){
                 cobalt.actionPicker({
                             text : "What you want to do?", // ios only
