@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
@@ -22,20 +23,20 @@
 
 <script>
 
-    Zepto(function($) {
-        cobalt.init();
+  Zepto(function($) {
+    cobalt.init();
 
-        // Share bindings
-        app.touch('#openPdf', function () {
-          var pdf = {
-            'source': 'url',
-            'path': 'http://cobaltians.org/unicorn_for_catalog_sample.pdf',
-          };
-            cobalt.openpdf(pdf);
-        });
-
-        app.initPage('Share Plugin');
+    // Share bindings
+    app.touch('#openPdf', function() {
+      var pdf = {
+        'source': 'url',
+        'path': 'http://cobaltians.org/unicorn_for_catalog_sample.pdf',
+      };
+      cobalt.openpdf(pdf);
     });
+
+    app.initPage('Share Plugin');
+  });
 
 </script>
 

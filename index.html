@@ -1,76 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>	        
-    </head>
-    <body>
-        <ul class="index">
-            <li>
-                <a class="push" href="javascript:;" data-href="navigation.html">Navigation<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="events.html" data-classid="events">Using events<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="callbacks.html" data-classid="callbacks">Using callbacks<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="toasts_&_alerts.html">Toasts & alerts<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="localstorage.html">LocalStorage<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="pulltorefresh.html" data-classid="pullToRefresh">Pull to refresh<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="infinitescroll.html" data-classid="infiniteScroll">Infinite scroll<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="ajax.html">Ajax<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="appEvents.html" data-classid="appEvents">AppEvents<img src="img/next.png" alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="nativeBars.html" data-classid="nativeBars">nativeBars <b>(new in 0.5)</b><img src="img/next.png" alt="next"></a>
-            </li>
-            <li class="green">
-                <a class="push" href="javascript:;" data-href="plugins.html" data-classid="plugins">Cobalt Plugins<img src="img/next.png" alt="next"></a>
-            </li>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body>
+<ul class="index">
+    <li>
+        <a class="push" href="javascript:;" data-href="navigation.html">Navigation<img src="img/next.png"
+                                                                                       alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="events.html" data-classid="events">Using events<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="callbacks.html" data-classid="callbacks">Using callbacks<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="toasts_&_alerts.html">Toasts & alerts<img src="img/next.png"
+                                                                                                 alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="localstorage.html">LocalStorage<img src="img/next.png"
+                                                                                           alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="pulltorefresh.html" data-classid="pullToRefresh">Pull to
+            refresh<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="infinitescroll.html" data-classid="infiniteScroll">Infinite
+            scroll<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="ajax.html">Ajax<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="appEvents.html" data-classid="appEvents">AppEvents<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="nativeBars.html" data-classid="nativeBars">nativeBars <b>(new in
+            0.5)</b><img src="img/next.png" alt="next"></a>
+    </li>
+    <li class="green">
+        <a class="push" href="javascript:;" data-href="plugins.html" data-classid="plugins">Cobalt Plugins<img
+                src="img/next.png" alt="next"></a>
+    </li>
 
-        </ul>
-        
+</ul>
 
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
 
-        <script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
-            Zepto(function($){
+<script>
 
-                cobalt.init();
+  Zepto(function($) {
 
-                cobalt.subscribe('cobalt:onBackButtonPressed', function(){
-                  cobalt.alert({
-                    title : 'Quit ?',
-                    message : "Are you sure you want to quit the app ?",
-                    buttons : ["Yes","No"],
-                    callback:function(data){
-                      if (data.index===0){
-                        //allow quitting
-                        cobalt.onBackButtonPressed.allow();
-                      }
-                    }
-                  })
-                });
+    cobalt.init();
 
-                app.initPage('Available pages')
-            })
-        </script>
+    cobalt.subscribe('cobalt:onBackButtonPressed', function() {
+      cobalt.alert({
+        title: 'Quit ?',
+        message: "Are you sure you want to quit the app ?",
+        buttons: ["Yes", "No"],
+        callback: function(data) {
+          if (data.index === 0) {
+            //allow quitting
+            cobalt.onBackButtonPressed.allow();
+          }
+        }
+      })
+    });
 
-    </body>
+    app.initPage('Available pages')
+  })
+</script>
+
+</body>
 </html>

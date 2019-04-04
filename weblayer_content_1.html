@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html class="webLayer">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    </head>
-    <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body>
 
-        <div class="webLayer">
-            <h1>This is a web layer!</h1>
-            <div class="block">
-                <p>It's your work to make it pretty.</p>
+<div class="webLayer">
+    <h1>This is a web layer!</h1>
+    <div class="block">
+        <p>It's your work to make it pretty.</p>
 
-                <a href="javascript:;" id="close">Close</a>
-            </div>
+        <a href="javascript:;" id="close">Close</a>
+    </div>
 
-        </div>
-
-
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+</div>
 
 
-        <script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
-            Zepto(function($){
 
-                cobalt.init();
+<script>
 
-                app.touch('#close',function(){
-                    cobalt.webLayer.dismiss();
-                });
+  Zepto(function($) {
 
-                app.initPage();
+    cobalt.init();
 
-            })
-        </script>
+    app.touch('#close', function() {
+      cobalt.webLayer.dismiss();
+    });
 
-    </body>
+    app.initPage();
+
+  })
+</script>
+
+</body>
 </html>

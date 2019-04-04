@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 
-        <style>
-            img {
-                display: inline-block;
-            }
-        </style>
-    </head>
-    <body>
+    <style>
+        img {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
 
-        <div class="block">
-            <p>The button below should load some images from unsplash.it using an ajax call.</p>
-        </div>
+<div class="block">
+    <p>The button below should load some images from unsplash.it using an ajax call.</p>
+</div>
 
-		<div class="block">
-			<a href="javascript:;" id="add">Add some content</a>
-		</div>
+<div class="block">
+    <a href="javascript:;" id="add">Add some content</a>
+</div>
 
-        <div id="images">
-        </div>
+<div id="images">
+</div>
 
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
-        <script>
-            var count = 0;
+<script>
+  var count = 0;
 
-            function addContent() {
-                cobalt.log('Loading...');
+  function addContent() {
+    cobalt.log('Loading...');
 
-                $.ajax({
-                    url: 'https://unsplash.it/list',
-                    type: 'GET',
-                    dataType: 'json',
-                    success : function (data) {
-                        cobalt.log('Server responded successfully with data: ' + data);
+    $.ajax({
+      url: 'https://unsplash.it/list',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        cobalt.log('Server responded successfully with data: ' + data);
 
-                        var imageList = data;
-                        var html = '';
+        var imageList = data;
+        var html = '';
 
-                        for (var i = 0; i < 10; i++, count++) {
-                            count %= imageList.length;
-                            html += '<img src="https://unsplash.it/64?image=' + imageList[count].id + '" />';
-                        }
+        for (var i = 0; i < 10; i++, count++) {
+          count %= imageList.length;
+          html += '<img src="https://unsplash.it/64?image=' + imageList[count].id + '" />';
+        }
 
-                        $('#images').append(html);
-                    },
-                    error: function (request, error) {
-                        cobalt.log('Ajax call failed: ' + error);
-                    }
-                });
-            }
+        $('#images').append(html);
+      },
+      error: function(request, error) {
+        cobalt.log('Ajax call failed: ' + error);
+      }
+    });
+  }
 
 
-            Zepto(function ($) {
-                cobalt.init();
+  Zepto(function($) {
+    cobalt.init();
 
-                app.touch('#add', addContent);
+    app.touch('#add', addContent);
 
-                app.initPage('Ajax');
-            });
-        </script>
+    app.initPage('Ajax');
+  });
+</script>
 
-    </body>
+</body>
 </html>

@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-	        <link rel="stylesheet" type="text/css" href="css/styles.css"/>	        
-    </head>
-    <body class="red">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="red">
 
-        <div class="block">
-            <p>The pop command should do nothing if you just open the modal.</p>
-            <p>There is a dismiss button below. Use it to close the modal.</p>
+<div class="block">
+    <p>The pop command should do nothing if you just open the modal.</p>
+    <p>There is a dismiss button below. Use it to close the modal.</p>
 
-            <a href="javascript:;" class="dismiss">DISMISS</a>
-        </div>
+    <a href="javascript:;" class="dismiss">DISMISS</a>
+</div>
 
-        <div class="block">
-            <p>You can push other pages in this modal.</p>
+<div class="block">
+    <p>You can push other pages in this modal.</p>
 
-            <a class="push" href="javascript:;" data-href="modal_content_2.html">Push modal content 2</a>
-		</div>
+    <a class="push" href="javascript:;" data-href="modal_content_2.html">Push modal content 2</a>
+</div>
 
-		<script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-
-
-        <script>
-
-            Zepto(function($){
-
-	            cobalt.init();
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
 
-                app.initPage('Modal content 1');
-	            
+<script>
 
-            })
-            
+  Zepto(function($) {
 
-        </script>
-        
-    </body>
+    cobalt.init();
+
+
+    app.initPage('Modal content 1');
+
+
+  })
+
+
+</script>
+
+</body>
 </html>

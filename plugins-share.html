@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
@@ -28,52 +29,52 @@
 
 <script>
 
-    Zepto(function($) {
-        cobalt.init();
+  Zepto(function($) {
+    cobalt.init();
 
-        // Share bindings
-        app.touch('#shareRemoteImage', function () {
-          var imageData = {
-            'type': 'image',
-            'source': 'url',
-            'path': 'http://cobaltians.org/blog/wp-content/themes/kichu/images/logo_menu.png',
-            'title': 'Cobalt Logo',
-            'detail': "From url by the Catalog sample at github.com/Cobaltians"
-          };
-            cobalt.share(imageData);
-        });
-
-        app.touch('#shareLocalImage', function () {
-          var imageData = {
-            'type': 'image',
-            'source': 'local',
-            'path': 'www/files/logo.png',
-            'title': 'Cobalt Logo',
-            'detail': "From the assets of Catalog sample at github.com/Cobaltians"
-          };
-            cobalt.share(imageData);
-        });
-
-        app.touch('#shareContact', function () {
-          var contactData = {
-            'type': 'contact',
-            'name': 'Cobaltians Assembly',
-            'email': 'contact@cobaltians.org',
-            'company': 'Cobaltians.org'
-          };
-          cobalt.share(contactData);
-        });
-
-        app.touch('#shareText', function () {
-          var textData = {
-            'type': 'text',
-            'content': "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-          };
-            cobalt.share(textData);
-        });
-
-        app.initPage('Share Plugin');
+    // Share bindings
+    app.touch('#shareRemoteImage', function() {
+      var imageData = {
+        'type': 'image',
+        'source': 'url',
+        'path': 'http://cobaltians.org/blog/wp-content/themes/kichu/images/logo_menu.png',
+        'title': 'Cobalt Logo',
+        'detail': "From url by the Catalog sample at github.com/Cobaltians"
+      };
+      cobalt.share(imageData);
     });
+
+    app.touch('#shareLocalImage', function() {
+      var imageData = {
+        'type': 'image',
+        'source': 'local',
+        'path': 'www/files/logo.png',
+        'title': 'Cobalt Logo',
+        'detail': "From the assets of Catalog sample at github.com/Cobaltians"
+      };
+      cobalt.share(imageData);
+    });
+
+    app.touch('#shareContact', function() {
+      var contactData = {
+        'type': 'contact',
+        'name': 'Cobaltians Assembly',
+        'email': 'contact@cobaltians.org',
+        'company': 'Cobaltians.org'
+      };
+      cobalt.share(contactData);
+    });
+
+    app.touch('#shareText', function() {
+      var textData = {
+        'type': 'text',
+        'content': "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+      };
+      cobalt.share(textData);
+    });
+
+    app.initPage('Share Plugin');
+  });
 
 </script>
 

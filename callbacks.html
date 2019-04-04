@@ -54,7 +54,7 @@
       }
     });
 
-    cobalt.subscribe('echo', function(data){
+    cobalt.subscribe('echo', function(data) {
       //just send back data to the native side. for automatic tests
       if (data.callback) {
         cobalt.publish(data.callback, data)
@@ -99,10 +99,11 @@
     }
 
     //send a test string and check it is still the same when comming back
-    cobalt.subscribe('echo_callback', function(data){
+    cobalt.subscribe('echo_callback', function(data) {
       var testResult = app.assertEqual('#' + testIndex, data.str, testStrings[testIndex]);
       next(testResult)
     });
+
     function sendAndCheck(testIndex) {
       cobalt.log('launching test #' + testIndex);
       cobalt.publish('echo', {str: testStrings[testIndex], callback: 'echo_callback'})

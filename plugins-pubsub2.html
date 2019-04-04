@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
@@ -35,25 +36,25 @@
 <script>
 
 
-    Zepto(function($){
+  Zepto(function($) {
 
-        cobalt.init();
-        app.initPage('PubSub Plugin 2')
+    cobalt.init();
+    app.initPage('PubSub Plugin 2')
 
-        $('#publish_dataChanged').on('click',function(){
-            cobalt.publish('dataChanged', { some : "other", random : "value" });
-        });
-        $('#subscribe_dataChanged').on('click',function(){
-            cobalt.subscribe('dataChanged', function(message){
-                $('#dataChanged_log').append(JSON.stringify(message)+'<br/>');
-            });
-        });
-        $('#unsubscribe_dataChanged').on('click',function(){
-            cobalt.unsubscribe('dataChanged');
-        });
+    $('#publish_dataChanged').on('click', function() {
+      cobalt.publish('dataChanged', {some: "other", random: "value"});
+    });
+    $('#subscribe_dataChanged').on('click', function() {
+      cobalt.subscribe('dataChanged', function(message) {
+        $('#dataChanged_log').append(JSON.stringify(message) + '<br/>');
+      });
+    });
+    $('#unsubscribe_dataChanged').on('click', function() {
+      cobalt.unsubscribe('dataChanged');
+    });
 
 
-    })
+  })
 
 </script>
 
