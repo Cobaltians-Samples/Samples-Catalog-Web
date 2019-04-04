@@ -9,7 +9,7 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>Publish and subscribe plugin</p>
+    <p>Publish and subscribe</p>
 
     <p>This page and the two others linked below uses the "myChannel" channel to keep a list up to date.</p>
 
@@ -58,7 +58,6 @@
 <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
 
 
-<script type="text/javascript" src="../PubSubPlugin/cobalt.pubsub.js"></script>
 <script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
@@ -68,7 +67,7 @@
   Zepto(function($) {
 
     cobalt.init();
-    app.initPage('PubSub Plugin')
+    app.initPage('PubSub')
 
     $('#publish_myChannel').on('click', function() {
       cobalt.publish('myChannel', {some: "random", values: 4, testing: "purpose"});
