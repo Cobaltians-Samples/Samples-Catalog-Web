@@ -35,13 +35,11 @@
 
             Zepto(function($){
 
-                cobalt.init({
-                    events:{
-                        "setZoom":function(data, callback){
-                            cobalt.log('received setZoom at '+new Date().getTime())
-                            app.setZoom(data.value)
-                        }
-                    }
+                cobalt.init();
+
+                cobalt.subscribe('setZoom', function(data){
+                  cobalt.log('received setZoom at '+new Date().getTime())
+                  app.setZoom(data.value);
                 });
 
                 app.touch('#monBouton1',function(){
@@ -51,7 +49,7 @@
                 });
 
                 app.touch('#monBouton2',function(){
-                    cobalt.sendEvent('hello');
+                    cobalt.publish('hello');
                 });
 
                 app.initPage('Using events')

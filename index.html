@@ -52,25 +52,21 @@
 
             Zepto(function($){
 
+                cobalt.init();
 
-                cobalt.init({
-                    events:{
-                        "onBackButtonPressed":function(data, callback){
-                            cobalt.alert({
-                                title : 'Quit ?',
-                                message : "Are you sure you want to quit the app ?",
-                                buttons : ["Yes","No"],
-                                callback:function(data){
-                                    if (data.index===0){
-                                        //allow quitting
-                                        cobalt.sendCallback(callback,{value : true});
-                                    }
-                                }
-                            })
-                        }
+                cobalt.subscribe('cobalt:onBackButtonPressed', function(){
+                  cobalt.alert({
+                    title : 'Quit ?',
+                    message : "Are you sure you want to quit the app ?",
+                    buttons : ["Yes","No"],
+                    callback:function(data){
+                      if (data.index===0){
+                        //allow quitting
+                        cobalt.onBackButtonPressed.allow();
+                      }
                     }
+                  })
                 });
-
 
                 app.initPage('Available pages')
             })
