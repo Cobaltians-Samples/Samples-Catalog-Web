@@ -72,7 +72,7 @@
     cobalt.init();
     cobalt.subscribe('cobalt:onBackButtonPressed', function(){
       cobalt.location.stop();
-      cobalt.backButtonPressed.allow();
+      cobalt.navigate.pop();
     });
 
     app.touch('#getLocation', function() {

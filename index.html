@@ -76,8 +76,8 @@
         buttons: ["Yes", "No"],
         callback: function(data) {
           if (data.index === 0) {
-            //allow quitting
-            cobalt.backButtonPressed.allow();
+            //quit manually
+            cobalt.navigate.pop();
           }
         }
       })
