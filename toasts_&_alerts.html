@@ -30,10 +30,6 @@
         When the alert is closed, the Web knows which button was clicked.</p>
     <a href="javascript:;" id="alert2">Show Alert</a>
 
-    <p>Same thing but with a string callback.</p>
-    <a href="javascript:;" id="alert3">Show Alert</a>
-
-
     <p>Large title and content on this one.</p>
     <a href="javascript:;" id="alert4">Show Alert</a>
 
@@ -92,31 +88,12 @@
         title: "Close me!",
         message: "You gonna close this alert!",
         buttons: buttons,
-        callback: function(data) {
-          cobalt.toast("alert closed. Your choice was: " + buttons[data.index])
+        callback: function(index) {
+          cobalt.toast("alert closed. Your choice was: " + buttons[index])
         }
       });
       return false;
     });
-
-    window.myObject = {
-      callMeBack: function(data) {
-        cobalt.log('myApp.callMeBack called with data=' + data)
-        cobalt.toast("alert closed. Your choice was: " + buttons[data.index])
-
-      }
-    }
-
-    app.touch('#alert3', function() {
-      cobalt.alert({
-        title: "Close me!",
-        message: "You gonna close this alert!",
-        buttons: buttons,
-        callback: 'myObject.callMeBack'
-      });
-      return false;
-    });
-
 
     app.touch('#alert4', function() {
       cobalt.alert({

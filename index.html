@@ -74,8 +74,8 @@
         title: 'Quit ?',
         message: "Are you sure you want to quit the app ?",
         buttons: ["Yes", "No"],
-        callback: function(data) {
-          if (data.index === 0) {
+        callback: function(index) {
+          if (index === 0) {
             //quit manually
             cobalt.navigate.pop();
           }
