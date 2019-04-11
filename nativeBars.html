@@ -144,29 +144,22 @@
     });
 
     app.touch('#setBars', function() {
-      cobalt.send({
-        type: "ui",
-        control: "bars",
-        data: {
-          action: "setBars",
-          bars: {
-            visible: {
-              top: true
-            },
-            backgroundColor: "#FFF77D",
-            color: "#EF9B0F",
-            title: "Bars set",
-            actions: [{
-              name: "sun",
-              title: "Sun !",
-              androidPosition: "top",
-              iosPosition: "topRight",
-              androidIcon: "sun",
-              iosIcon: "sun.png",
-              badge: ""
-            }]
-          }
-        }
+      cobalt.setBars({
+        visible: {
+          top: true
+        },
+        backgroundColor: "#FFF77D",
+        color: "#EF9B0F",
+        title: "Bars set",
+        actions: [{
+          name: "sun",
+          title: "Sun !",
+          androidPosition: "top",
+          iosPosition: "topRight",
+          androidIcon: "sun",
+          iosIcon: "sun.png",
+          badge: ""
+        }]
       });
     });
 
