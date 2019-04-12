@@ -65,7 +65,7 @@
       $('#result_1 span').html(data.result)
     });
     app.touch('#button_1', function() {
-      cobalt.publish("addValues", {values: [1, 3]});
+      cobalt.publish("addValues", {values: [1, 3], callback: 'addValues_callback'});
     });
 
     var testStrings = [
