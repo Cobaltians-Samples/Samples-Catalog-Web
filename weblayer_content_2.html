@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html class="webLayer">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    </head>
-    <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body>
 
-        <div class="webLayer webLayer2">
-            <h1>Write something !</h1>
-            <div class="block">
-            <textarea id="text"></textarea>
-            
-                <a href="javascript:;" id="close">Close</a>
-            </div>
-        </div>
+<div class="webLayer webLayer2">
+    <h1>Write something !</h1>
+    <div class="block">
+        <textarea id="text"></textarea>
 
-
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+        <a href="javascript:;" id="close">Close</a>
+    </div>
+</div>
 
 
-        <script>
-
-            Zepto(function($){
-
-                cobalt.init({
-                    debug:app.debug,
-                    debugInBrowser:app.debugInBrowser,
-                    debugInDiv:app.debugInDiv
-                });
-
-                setTimeout(function(){
-                    $('#text').focus();
-                },350);
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
 
+<script>
 
-                app.touch('#close',function(){
-                    $('#text').blur();
-                    cobalt.webLayer.dismiss({ value : $('#text').val() });
-                });
+  Zepto(function($) {
 
-                app.initPage();
+    cobalt.init();
 
-            })
+    setTimeout(function() {
+      $('#text').focus();
+    }, 350);
 
 
-        </script>
+    app.touch('#close', function() {
+      $('#text').blur();
+      cobalt.webLayer.dismiss({value: $('#text').val()});
+    });
 
-    </body>
+    app.initPage();
+
+  })
+
+
+</script>
+
+</body>
 </html>

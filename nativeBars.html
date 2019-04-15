@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="green">
@@ -36,175 +37,164 @@
 
 
 <script type="text/javascript" src="js/zepto.min.js"></script>
-<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
 
 <script>
-    var badge = 0;
+  var badge = 0;
 
-    var barLog = function (str) {
-        $('#barLog').append(str + '<br/>');
-    };
+  var barLog = function(str) {
+    $('#barLog').append(str + '<br/>');
+  };
 
-    Zepto(function ($) {
+  Zepto(function($) {
 
-        cobalt.init({
-            debug: app.debug,
-            debugInBrowser: app.debugInBrowser,
-            debugInDiv: false
-        });
+    cobalt.init();
 
-        cobalt.nativeBars.setEventListener(function (item, event) {
-            switch (item) {
-                case "cloud":
-                    barLog('Oh no, clouds again!');
-                    break;
-                case "moon":
-                    barLog('Moon is the queen!');
-                    break;
-                case "sun":
-                    barLog("Sun is shining!");
-                    break;
-                case "bolt":
-                    barLog('Bolt !');
-                    break;
-                default :
-                    barLog('An unknown button has been pressed.');
-                    break;
+    cobalt.nativeBars.setEventListener(function(item, event) {
+      switch (item) {
+        case "cloud":
+          barLog('Oh no, clouds again!');
+          break;
+        case "moon":
+          barLog('Moon is the queen!');
+          break;
+        case "sun":
+          barLog("Sun is shining!");
+          break;
+        case "bolt":
+          barLog('Bolt !');
+          break;
+        default :
+          barLog('An unknown button has been pressed.');
+          break;
+      }
+    });
+
+    app.initPage('Native Bars');
+
+
+    app.touch('#showFooter', function() {
+      cobalt.nativeBars.setBarsVisible({
+        bottom: true
+      });
+    });
+
+    app.touch('#setBarContent', function() {
+      cobalt.nativeBars.setBarContent({
+        backgroundColor: "#4444FF",
+        color: "FFF",
+        title: "Content set"
+      });
+    });
+
+    var visibilities = [
+      {top: false, bottom: true},
+      {top: false, bottom: false},
+      {top: true, bottom: false},
+      {top: true, bottom: true}
+    ];
+    var visibilitiesIndex = 0;
+
+    app.touch('#showHideBars', function() {
+      var newVisibility = visibilities[visibilitiesIndex];
+      cobalt.toast('setting bar visibility to ' + JSON.stringify(newVisibility));
+      cobalt.nativeBars.setBarsVisible(newVisibility);
+      visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0;
+    });
+
+    app.touch('#pushWithBars', function() {
+      cobalt.navigate.push({
+        page: "nativeBars.html",
+        controller: "nativeBars",
+        bars: {
+          visible: {
+            top: true,
+            bottom: true
+          },
+          backgroundColor: "#4444FF",
+          color: "000",
+          title: "Pushed",
+          androidNavigationIcon: {
+            enabled: true,
+            icon: "fa fa-arrow-circle-left"
+          },
+          actions: [
+            {
+              name: "sun",
+              title: "Sun !",
+              androidPosition: "top",
+              iosPosition: "topRight",
+              androidIcon: "sun",
+              iosIcon: "sun.png",
+              badge: ""
+            },
+            {
+              name: "cloudy",
+              title: "Clouds are coming",
+              iosPosition: "bottom",
+              androidPosition: "bottom",
+              androidIcon: "cloudy",
+              iosIcon: "cloudy.png"
             }
-        });
+          ]
+        }
+      });
+    });
 
-        app.initPage('Native Bars');
-
-
-        app.touch('#showFooter', function () {
-            cobalt.nativeBars.setBarsVisible({
-                bottom: true
-            });
-        });
-
-        app.touch('#setBarContent', function () {
-            cobalt.nativeBars.setBarContent({
-                backgroundColor: "#4444FF",
-                color: "FFF",
-                title: "Content set"
-            });
-        });
-
-        var visibilities = [
-            {top: false, bottom: true},
-            {top: false, bottom: false},
-            {top: true, bottom: false},
-            {top: true, bottom: true}
-        ];
-        var visibilitiesIndex = 0;
-
-        app.touch('#showHideBars', function () {
-            var newVisibility = visibilities[visibilitiesIndex];
-            cobalt.toast('setting bar visibility to ' + JSON.stringify(newVisibility));
-            cobalt.nativeBars.setBarsVisible(newVisibility);
-            visibilitiesIndex = ( visibilitiesIndex + 1 < visibilities.length ) ? visibilitiesIndex + 1 : 0;
-        });
-
-        app.touch('#pushWithBars', function () {
-            cobalt.navigate.push({
-                page: "nativeBars.html",
-                controller: "nativeBars",
-                bars: {
-                    visible: {
-                        top: true,
-                        bottom: true
-                    },
-                    backgroundColor: "#4444FF",
-                    color: "000",
-                    title: "Pushed",
-                    androidNavigationIcon: {
-                        enabled: true,
-                        icon: "fa fa-arrow-circle-left"
-                    },
-                    actions: [
-                        {
-                            name: "sun",
-                            title: "Sun !",
-                            androidPosition: "top",
-                            iosPosition: "topRight",
-                            androidIcon: "sun",
-                            iosIcon: "sun.png",
-                            badge: ""
-                        },
-                        {
-                            name: "cloudy",
-                            title: "Clouds are coming",
-                            iosPosition: "bottom",
-                            androidPosition: "bottom",
-                            androidIcon: "cloudy",
-                            iosIcon: "cloudy.png"
-                        }
-                    ]
-                }
-            });
-        });
-
-        app.touch('#setBars', function () {
-            cobalt.send({
-                type: "ui",
-                control: "bars",
-                data: {
-                    action: "setBars",
-                    bars: {
-                        visible: {
-                            top: true
-                        },
-                        backgroundColor: "#FFF77D",
-                        color: "#EF9B0F",
-                        title: "Bars set",
-                        actions: [{
-                            name: "sun",
-                            title: "Sun !",
-                            androidPosition: "top",
-                            iosPosition: "topRight",
-                            androidIcon: "sun",
-                            iosIcon: "sun.png",
-                            badge: ""
-                        }]
-                    }
-                }
-            });
-        });
+    app.touch('#setBars', function() {
+      cobalt.setBars({
+        visible: {
+          top: true
+        },
+        backgroundColor: "#FFF77D",
+        color: "#EF9B0F",
+        title: "Bars set",
+        actions: [{
+          name: "sun",
+          title: "Sun !",
+          androidPosition: "top",
+          iosPosition: "topRight",
+          androidIcon: "sun",
+          iosIcon: "sun.png",
+          badge: ""
+        }]
+      });
+    });
 
 
-        app.touch('.showHideAction', function () {
-            console.log($(this));
-            var button = $(this).attr('data-button-name');
-            var newValue = $(this).hasClass('buttonShown');
-            cobalt.toast((newValue ? 'showing' : 'hiding') + ' button ' + button);
-            cobalt.nativeBars.setActionVisible(button, newValue);
-            $(this).toggleClass('buttonShown');
-        });
+    app.touch('.showHideAction', function() {
+      console.log($(this));
+      var button = $(this).attr('data-button-name');
+      var newValue = $(this).hasClass('buttonShown');
+      cobalt.toast((newValue ? 'showing' : 'hiding') + ' button ' + button);
+      cobalt.nativeBars.setActionVisible(button, newValue);
+      $(this).toggleClass('buttonShown');
+    });
 
-        app.touch('.disbaleEnableAction', function () {
-            console.log($(this));
-            var button = $(this).attr('data-button-name');
-            var newValue = $(this).hasClass('buttonEnabled');
-            cobalt.toast((newValue ? 'enabling' : 'disabling') + ' button ' + button);
-            cobalt.nativeBars.setActionEnabled(button, newValue);
-            $(this).toggleClass('buttonEnabled');
-        });
+    app.touch('.disbaleEnableAction', function() {
+      console.log($(this));
+      var button = $(this).attr('data-button-name');
+      var newValue = $(this).hasClass('buttonEnabled');
+      cobalt.toast((newValue ? 'enabling' : 'disabling') + ' button ' + button);
+      cobalt.nativeBars.setActionEnabled(button, newValue);
+      $(this).toggleClass('buttonEnabled');
+    });
 
-        app.touch('#increaseBadge', function () {
-            //increment a counter
-            cobalt.nativeBars.setActionBadge('sun', count = (window.count || 0) + 1);
-        });
+    app.touch('#increaseBadge', function() {
+      //increment a counter
+      cobalt.nativeBars.setActionBadge('sun', count = (window.count || 0) + 1);
+    });
 
-        app.touch('#changeActionContent', function () {
-            cobalt.nativeBars.setActionContent('sun', {
-                "icon": "fa fa-heart",
-                "color": "#FF0000"
-            });
-        });
+    app.touch('#changeActionContent', function() {
+      cobalt.nativeBars.setActionContent('sun', {
+        "icon": "fa fa-heart",
+        "color": "#FF0000"
+      });
+    });
 
-    })
+  })
 </script>
 </body>
 </html>

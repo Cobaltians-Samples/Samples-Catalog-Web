@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    </head>
-    <body class="theme_green">
-        <ul class="index">
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-appinfos.html" data-classid="plugins">AppInfos Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-location.html" data-classid="plugins">Location Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-actionpicker.html" data-classid="plugins">ActionPicker Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-networkstatus.html" data-classid="plugins">NetworkStatus Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-batterystatus.html" data-classid="plugins">BatteryStatus Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-share.html" data-classid="plugins">Share Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-            <li>
-                <a class="push" href="javascript:;" data-href="plugins-pdf.html" data-classid="plugins">Pdf Plugin<img src="img/next.png"alt="next"></a>
-            </li>
-        </ul>
-        <div class="block">
-            <p><b>Note : </b> All plugins must be linked to the project for those pages to work. Please refer to each plugin tutorial to do this.</p>
-        </div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+<ul class="index">
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-appinfos.html" data-classid="plugins">AppInfos Plugin<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-location.html" data-classid="plugins">Location Plugin<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-actionpicker.html" data-classid="plugins">ActionPicker
+            Plugin<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-networkstatus.html" data-classid="plugins">NetworkStatus
+            Plugin<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-batterystatus.html" data-classid="plugins">BatteryStatus
+            Plugin<img src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-share.html" data-classid="plugins">Share Plugin<img
+                src="img/next.png" alt="next"></a>
+    </li>
+    <li>
+        <a class="push" href="javascript:;" data-href="plugins-pdf.html" data-classid="plugins">Pdf Plugin<img
+                src="img/next.png" alt="next"></a>
+    </li>
+</ul>
+<div class="block">
+    <p><b>Note : </b> All plugins must be linked to the project for those pages to work. Please refer to each plugin
+        tutorial to do this.</p>
+</div>
 
 
-        <script type="text/javascript" src="js/zepto.min.js"></script>
-        <script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
-        <script>
+<script>
+  Zepto(function($) {
+    cobalt.init();
 
-            Zepto(function($){
+    app.initPage('Available plugins')
+  })
+</script>
 
-
-                cobalt.init({
-                    debug : app.debug,
-                    debugInBrowser : app.debugInBrowser,
-                    debugInDiv : app.debugInDiv
-                });
-
-
-                app.initPage('Available plugins')
-            })
-        </script>
-
-    </body>
+</body>
 </html>

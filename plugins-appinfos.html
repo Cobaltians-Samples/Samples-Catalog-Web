@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
 
 <div class="block">
-    <p>Your app infos should appears in the space bellow. If not, check if you have correctly installed the plugin or look at your device logs for any clues.</p>
+    <p>Your app infos should appears in the space bellow. If not, check if you have correctly installed the plugin or
+        look at your device logs for any clues.</p>
 </div>
 <div class="block" style="max-width:100%; overflow:scroll;">
-    <p>Your app infos are: <b id="locationField" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</b></p>
+    <p>Your app infos are: <b id="locationField" style="border:1px solid #ccc; padding:5px; ">[waiting for
+        plugin...]</b></p>
 
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
-<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
 
 
 <script type="text/javascript" src="../AppInfosPlugin/cobalt.appInfos.js"></script>
@@ -23,19 +26,15 @@
 
 <script>
 
-    Zepto(function($){
-        cobalt.init({
-            debug:app.debug,
-            debugInBrowser:app.debugInBrowser,
-            debugInDiv:app.debugInDiv
-        });
+  Zepto(function($) {
+    cobalt.init();
 
-        cobalt.getAppInfos(function(infos){
-            document.getElementById('locationField').innerHTML = '<pre>'+JSON.stringify(infos, null, 2)+'</pre>';
-        });
-
-        app.initPage('AppInfos Plugin');
+    cobalt.getAppInfos(function(infos) {
+      document.getElementById('locationField').innerHTML = '<pre>' + JSON.stringify(infos, null, 2) + '</pre>';
     });
+
+    app.initPage('AppInfos Plugin');
+  });
 
 </script>
 
