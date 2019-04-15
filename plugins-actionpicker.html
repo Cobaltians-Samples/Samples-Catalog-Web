@@ -38,9 +38,9 @@
         text: "What you want to do?", // ios only
         actions: ["Choose a picture", "Take a picture", "Take a video"],
         cancel: "Cancel", // ios only
-      }, function(data) {
-        cobalt.log('picker callback', data)
-        document.getElementById('choiceField').innerHTML = "Choice n°" + JSON.stringify(data.index);
+      }, function(index) {
+        cobalt.log('picker callback', index)
+        document.getElementById('choiceField').innerHTML = "Choice n°" + index;
       });
     });
     app.initPage('ActionPicker Plugin')
