@@ -9,10 +9,10 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>Click on this PDF button to preview a sample pdf.</p>
+    <p>Click on this PDF button to download and open a sample pdf.</p>
 </div>
 <div class="block">
-    <a href="javascript:;" id="openPdf">Preview Sample PDF</a>
+    <a href="javascript:;" id="openPdf">Open Sample PDF</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
@@ -26,16 +26,14 @@
   Zepto(function($) {
     cobalt.init();
 
-    // Share bindings
     app.touch('#openPdf', function() {
-      var pdf = {
-        'source': 'url',
-        'path': 'http://cobaltians.org/unicorn_for_catalog_sample.pdf',
-      };
-      cobalt.openpdf(pdf);
+      cobalt.openpdf({
+        source: 'url',
+        path: 'https://firebasestorage.googleapis.com/v0/b/cobaltians-by-kristal.appspot.com/o/unicorn.pdf?alt=media&token=52d8cf9d-1eac-40fa-ac13-9500fa2db61d',
+      });
     });
 
-    app.initPage('Share Plugin');
+    app.initPage('PDF Plugin');
   });
 
 </script>
