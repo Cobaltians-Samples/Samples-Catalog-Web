@@ -9,16 +9,16 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>Click on the Share button to share Cobalt logo.</p>
+    <p>Click on the Share button to share the pictures below.</p>
 </div>
 <div class="block" style="max-width:100%; overflow:scroll; text-align: center;">
-    <img src="http://cobaltians.org/blog/wp-content/themes/kichu/images/logo_menu.png" alt="cobalt logo to share">
+    <img src="https://firebasestorage.googleapis.com/v0/b/cobaltians-by-kristal.appspot.com/o/SampleCatalogFiles%2FCapture%20d%E2%80%99e%CC%81cran%202019-04-16%20a%CC%80%2017.15.42.png?alt=media&token=a0f2d907-a483-4a2e-ae33-505582e66e38" alt="sample picture to share">
 </div>
 <div class="block">
-    <a href="javascript:;" id="shareRemoteImage">Share Cobalt logo from url</a><br>
-    <a href="javascript:;" id="shareLocalImage">Share Cobalt logo from assets</a><br>
+    <a href="javascript:;" id="shareRemoteImage">Share picture from remote url</a><br>
+    <a href="javascript:;" id="shareLocalImage">Share Cobalt logo from local assets</a><br>
     <a href="javascript:;" id="shareContact">Share a contact</a><br>
-    <a href="javascript:;" id="shareText">Share Text</a>
+    <a href="javascript:;" id="shareText">Share some Text</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
@@ -37,9 +37,9 @@
       var imageData = {
         'type': 'image',
         'source': 'url',
-        'path': 'http://cobaltians.org/blog/wp-content/themes/kichu/images/logo_menu.png',
-        'title': 'Cobalt Logo',
-        'detail': "From url by the Catalog sample at github.com/Cobaltians"
+        'path': 'https://firebasestorage.googleapis.com/v0/b/cobaltians-by-kristal.appspot.com/o/SampleCatalogFiles%2FCapture%20d%E2%80%99e%CC%81cran%202019-04-16%20a%CC%80%2017.15.42.png?alt=media&token=a0f2d907-a483-4a2e-ae33-505582e66e38',
+        'title': 'Sample picture',
+        'detail': "Shared from remote url"
       };
       cobalt.share(imageData);
     });
@@ -48,9 +48,9 @@
       var imageData = {
         'type': 'image',
         'source': 'local',
-        'path': 'www/files/logo.png',
-        'title': 'Cobalt Logo',
-        'detail': "From the assets of Catalog sample at github.com/Cobaltians"
+        'path': 'www/img/samplePicture.png',
+        'title': 'Sample picture',
+        'detail': "Shared from the assets of Catalog sample"
       };
       cobalt.share(imageData);
     });
