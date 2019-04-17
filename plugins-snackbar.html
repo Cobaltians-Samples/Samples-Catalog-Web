@@ -34,12 +34,12 @@
 
     app.touch('#test2', function() {
       cobalt.snackbar.show({
-        text: 'Snackbar with button and callback',
-        duration: cobalt.snackbar.duration.SHORT,
-        button: 'Dismiss',
+        text: 'Do you like button',
+        duration: cobalt.snackbar.duration.LONG,
+        button: 'No !',
         buttonColor: '#FF7700',
         callback: function () {
-          cobalt.toast('Snackbar dismissed!');
+          cobalt.toast('Snackbar button pressed !');
         }
       });
     });
