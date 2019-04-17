@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>This is the Snackbar plugin, click on the button and choose an action.</p>
+</div>
+
+<div class="block">
+    <a href="javascript:;" id="test1">Simple snackbar</a>
+    <a href="javascript:;" id="test2">Snackbar with button and callback</a>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
+
+
+<script type="text/javascript" src="js/Plugins-Snackbar-Web/cobalt.snackbar.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+  Zepto(function($) {
+    cobalt.init();
+
+    app.touch('#test1', function() {
+      cobalt.snackbar.show('Simplest snackbar!');
+    });
+
+    app.touch('#test2', function() {
+      cobalt.snackbar.show({
+        text: 'Snackbar with button and callback',
+        duration: cobalt.snackbar.duration.SHORT,
+        button: 'Dismiss',
+        buttonColor: '#FF7700',
+        callback: function () {
+          cobalt.toast('Snackbar dismissed!');
+        }
+      });
+    });
+    app.initPage('ActionPicker Plugin')
+  })
+</script>
+
+</body>
+</html>
+
