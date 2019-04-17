@@ -75,13 +75,13 @@
       var keyvalue = cobalt.storage.get('testLocalStorageKey')
       if (keyvalue) {
         if (keyvalue.value) {
-          cobalt.log("value key of 'testLocalStorageKey' contains : " + keyvalue.value)
+          cobalt.toast("value key of 'testLocalStorageKey' contains : " + keyvalue.value)
         }
         else {
-          cobalt.log("value key of 'testLocalStorageKey' is not set.")
+          cobalt.toast("value key of 'testLocalStorageKey' is not set.")
         }
       } else {
-        cobalt.log("key 'testLocalStorageKey' is not set")
+        cobalt.toast("key 'testLocalStorageKey' is not set")
       }
     });
 
@@ -139,7 +139,7 @@
         return result;
       }, true);
 
-      cobalt.log("--end of automatic tests")
+      cobalt.toast("end of tests")
     });
 
 
