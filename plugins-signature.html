@@ -5,6 +5,15 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+
+    <style>
+        #signatureField{
+            border:1px solid #ccc; padding:5px;
+        }
+        #signatureField img{
+            width:100%;
+        }
+    </style>
 </head>
 <body class="theme_green">
 
@@ -19,8 +28,8 @@
 </ul>
 
 <div class="block">
-    <p>Signature saved as : <b id="signatureField" style="border:1px solid #ccc; padding:5px;"></b></p>
-
+    <p>Signature saved as :</p>
+    <div id="signatureField"></div>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
@@ -34,9 +43,10 @@
     cobalt.init();
 
     app.touch('#choice', function() {
-        cobalt.signature(function(data){
+        cobalt.signature({size: 450}, function(data){
             cobalt.log('Signature saved at ', data);
-            document.getElementById('signatureField').innerHTML = "id : " + data.id;
+            base64 = 'data:image/png;base64, ' + data.picture;
+            document.getElementById('signatureField').innerHTML = '<img src="' + base64 + '"/>';
         });
     });
     app.initPage('Signature Plugin')
