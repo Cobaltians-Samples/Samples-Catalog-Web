@@ -35,25 +35,27 @@
   Zepto(function($) {
     cobalt.init();
 
-    function displayState(state) {
-      $('#stateDisplay').html(state);
+    function displayState(data) {
+      $('#stateDisplay').html(data && data.state || 'Unknown');
     }
 
-    function displayLevel(level) {
-      if (level >= 0) {
-        $('#levelDisplay').html(level + '%');
+    function displayLevel(data) {
+      if (data && data.level >= 0) {
+        $('#levelDisplay').html(data.level + '%');
       }
       else {
-        $('#levelDisplay').html('unknown');
+        $('#levelDisplay').html('Unknown');
       }
     }
 
     function toggleMonitoring() {
-      var monitoring = $('#monitoring').attr('data-next-monitoring') == 'on';
+      var monitoring = $('#monitoring').attr('data-next-monitoring') === 'on';
 
       if (monitoring) {
         $('#monitoring').html('Stop').attr('data-next-monitoring', 'off');
-        cobalt.batteryStatus.startMonitoring();
+        cobalt.batteryStatus.startMonitoring({
+          onStateChanged: displayState
+        });
       }
       else {
         $('#monitoring').html('Start').attr('data-next-monitoring', 'on');
