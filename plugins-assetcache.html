@@ -37,32 +37,35 @@
 
     app.touch('#download', function() {
       cobalt.assetCache.download({
-        'url' : url
-      }, function(index) {
-        cobalt.log('download callback', data)
-        document.getElementById('resultField').innerHTML = data.status;
-        if (data.status = 'error')
-            document.getElementById('resultField').innerHTML = ' : ' + data.cause;
+        'url' : url.value
+      }, function(data) {
+        cobalt.log('download callback', data);
+        var result = data.status;
+        if (data.status == 'error')
+            result += ' : ' + data.cause;
+        document.getElementById('resultField').innerHTML = result;
         //TODO Fill listField
       });
+    });
 
-      app.touch('#delete', function() {
-
+    app.touch('#delete', function() {
       var options;
-      if (isNan(url))
-        options = {'path'= path};
+      if (url.value !== null)
+        options = {'url' : url.value};
       else
-        options = {'url' = url};
+        options = {'path' : path.value};
+      cobalt.log('options : ', options);
 
-      cobalt.assetCache.delete(options, function(index) {
-        cobalt.log('delete callback', data)
-        document.getElementById('resultField').innerHTML = data.status;
-        if (data.status = 'error')
-            document.getElementById('resultField').innerHTML = ' : ' + data.cause;
+      cobalt.assetCache.delete(options, function(data) {
+        cobalt.log('delete callback', data);
+        var result = data.status;
+        if (data.status == 'error')
+            result += ' : ' + data.cause;
+        document.getElementById('resultField').innerHTML = result;
         //TODO Fill listField
       });
     });
-    });
+
     app.initPage('AssetCache Plugin')
   })
 </script>
