@@ -32,12 +32,12 @@
   Zepto(function($) {
     cobalt.init();
 
-    function displayStatus(status) {
-      $('#statusDisplay').html(status);
+    function displayStatus(data) {
+      $('#statusDisplay').html(data.status);
     }
 
     function toggleMonitoring() {
-      var monitoring = $('#monitoring').attr('data-next-monitoring') == 'on';
+      var monitoring = $('#monitoring').attr('data-next-monitoring') === 'on';
 
       if (monitoring) {
         $('#monitoring').html('Stop').attr('data-next-monitoring', 'off');
@@ -64,7 +64,7 @@
     // Set refresh button callback
     app.touch('#refreshStatus', function() {
       cobalt.networkStatus.getStatus(displayStatus);
-    })
+    });
 
     app.initPage('NetworkStatus Plugin');
   });
