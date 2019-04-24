@@ -9,19 +9,18 @@
 <body class="theme_green">
 
 <div class="block">
-    <p>This is the AssetCache plugin, enter an URL or Path, and click on the "Download" or "Delete" button.</p>
+    <p>This is the AssetCache plugin, enter an URL, and click on the "Download" or "Delete" button.</p>
 </div>
 
 <div class="block">
     <input id="url" type="url" placeholder="URL">
-    <input id="path" type="text" placeholder="Path">
     <a href="javascript:;" id="download">Download</a>
     <a href="javascript:;" id="delete">Delete</a>
 </div>
 
 <div class="block">
     <p>Result of action :<b id="resultField" style="border:1px solid #ccc; padding:5px;"></b></p>
-    <p>List of local files :<b id="listField" style="border:1px solid #ccc; padding:5px;"></b></p>
+    <p>List of local files :<b id="assetsField" style="border:1px solid #ccc; padding:5px;"></b></p>
 
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
@@ -35,36 +34,62 @@
   Zepto(function($) {
     cobalt.init();
 
+    //Load and display saved assets
+    var assets = cobalt.storage.get('assets') || {};
+    displayAssets(assets);
+
+    //Click on Download button
     app.touch('#download', function() {
       cobalt.assetCache.download({
         'url' : url.value
       }, function(data) {
         cobalt.log('download callback', data);
         var result = data.status;
-        if (data.status == 'error')
+        if (data.status == 'error'){
             result += ' : ' + data.cause;
+        } else if (data.status == 'downloading'){
+            result += ' : ' + data.progress + '%';
+        } else {
+            cobalt.log("url : ", url.value);
+            cobalt.log("path : ", "file://" + data.path);
+            assets[url.value] = "file://" + data.path;
+            cobalt.storage.set('assets',assets);
+            displayAssets(assets);
+        }
         document.getElementById('resultField').innerHTML = result;
-        //TODO Fill listField
       });
     });
 
+    //Click on Delete button
     app.touch('#delete', function() {
-      var options;
-      if (url.value !== null)
-        options = {'url' : url.value};
-      else
-        options = {'path' : path.value};
-      cobalt.log('options : ', options);
+      var options = {'url' : url.value};
 
       cobalt.assetCache.delete(options, function(data) {
         cobalt.log('delete callback', data);
         var result = data.status;
-        if (data.status == 'error')
+        if (data.status == 'error'){
             result += ' : ' + data.cause;
+        } else {
+            delete assets[url.value];
+            cobalt.storage.set('assets',assets);
+            displayAssets(assets);
+        }
         document.getElementById('resultField').innerHTML = result;
-        //TODO Fill listField
+
       });
     });
+
+    //Display assets list
+    function displayAssets(assets){
+        cobalt.log("assets : ",  assets);
+        document.getElementById('assetsField').innerHTML = '';
+        var assetsField = '';
+        for (var url in assets){
+          cobalt.log("asset to display: ",  assets[url]);
+          assetsField += '<img src="' + assets[url] + '"/></br>';
+        }
+        document.getElementById('assetsField').innerHTML = assetsField;
+    }
 
     app.initPage('AssetCache Plugin')
   })
