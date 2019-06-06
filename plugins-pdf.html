@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
 
 <div class="block">
-    <p>Click on this PDF button to preview a sample pdf.</p>
+    <p>Click on this PDF button to download and open a sample pdf.</p>
 </div>
 <div class="block">
-    <a href="javascript:;" id="openPdf">Preview Sample PDF</a>
+    <a href="javascript:;" id="openPdf">Open Sample PDF</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
-<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
 
 
-<script type="text/javascript" src="../PdfPlugin/cobalt.pdf.js"></script>
+<script type="text/javascript" src="js/Plugins-Pdf-Web/cobalt.pdf.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
 <script>
 
-    Zepto(function($) {
-        cobalt.init({
-            debug: app.debug,
-            debugInBrowser: app.debugInBrowser,
-            debugInDiv: app.debugInDiv
-        });
+  Zepto(function($) {
+    cobalt.init();
 
-        // Share bindings
-        app.touch('#openPdf', function () {
-          var pdf = {
-            'source': 'url',
-            'path': 'http://cobaltians.org/unicorn_for_catalog_sample.pdf',
-          };
-            cobalt.openpdf(pdf);
-        });
-
-        app.initPage('Share Plugin');
+    app.touch('#openPdf', function() {
+      cobalt.openpdf({
+        source: 'url',
+        path: 'https://firebasestorage.googleapis.com/v0/b/cobaltians-by-kristal.appspot.com/o/SampleCatalogFiles%2Funicorn.pdf?alt=media&token=b7e02b70-805d-43e8-baaf-3c519518430d',
+      });
     });
+
+    app.initPage('PDF Plugin');
+  });
 
 </script>
 

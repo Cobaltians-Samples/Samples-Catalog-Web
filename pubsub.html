@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>Publish and subscribe</p>
+
+    <p>This page and the two others linked below uses the "myChannel" channel to keep a list up to date.</p>
+
+    <p>Hit this button to send a new message into "dataChanged"</p>
+
+    <a href="javascript:;" id="publish_myChannel">publish something</a><br/>
+
+    <p>Hit this button to subscribe to the channel. Messages received will be shown in the grey box below.</p>
+
+    <a href="javascript:;" id="subscribe_myChannel">subscribe</a><br/>
+
+    <p>Hit this button to unsubscribe to the channel.</p>
+
+    <a href="javascript:;" id="unsubscribe_myChannel">unsubscribe</a><br/>
+
+</div>
+
+
+<div id="myChannel_log" class="block" style="padding:5px; background:#CCC; min-height: 40px;">
+    <b>Channel "myChannel"</b><br/>
+    messages received (once subscribed) will appear here<br/>
+</div>
+
+<div class="block">
+    <p>Now, another channel name "dataChanged".</p>
+
+    <a href="javascript:;" id="subscribe_dataChanged">subscribe</a><br/>
+
+    <a href="javascript:;" id="publish_dataChanged">publish something</a><br/>
+
+    <a href="javascript:;" id="unsubscribe_dataChanged">unsubscribe</a><br/>
+
+    <p>This one is also used on the second page below</p>
+
+    <a class="push" href="javascript:;" data-href="pubsub2.html" data-classid="plugins">Second page</a>
+
+</div>
+
+<div id="dataChanged_log" class="block" style="padding:5px; background:#CCC; min-height: 40px;">
+    <b>Channel "dataChanged"</b><br/>
+    messages received (once subscribed) will appear here<br/>
+</div>
+
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+
+
+  Zepto(function($) {
+
+    cobalt.init();
+    app.initPage('PubSub')
+
+    $('#publish_myChannel').on('click', function() {
+      cobalt.publish('myChannel', {some: "random", values: 4, testing: "purpose"});
+    });
+    $('#subscribe_myChannel').on('click', function() {
+      cobalt.subscribe('myChannel', function(message) {
+        $('#myChannel_log').append(JSON.stringify(message) + '<br/>');
+      });
+    });
+    $('#unsubscribe_myChannel').on('click', function() {
+      cobalt.unsubscribe('myChannel');
+    });
+
+    $('#publish_dataChanged').on('click', function() {
+      cobalt.publish('dataChanged', {some: "other", random: "value"});
+    });
+    $('#subscribe_dataChanged').on('click', function() {
+      cobalt.subscribe('dataChanged', function(message) {
+        $('#dataChanged_log').append(JSON.stringify(message) + '<br/>');
+      });
+    });
+    $('#unsubscribe_dataChanged').on('click', function() {
+      cobalt.unsubscribe('dataChanged');
+    });
+
+
+  })
+
+</script>
+
+</body>
+</html>

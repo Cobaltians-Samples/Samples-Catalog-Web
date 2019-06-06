@@ -1,89 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body class="theme_green">
 
 <div class="block">
-    <p>The battery status should appear in the space below. After enabling battery state monitoring, try toggling the power saving mode to see the plugin in action.</p>
+    <p>The battery status should appear in the space below. After enabling battery state monitoring, try toggling the
+        power saving mode to see the plugin in action.</p>
 </div>
 <div class="block" style="max-width:100%; overflow:scroll;">
-    <p>Battery state: <span id="stateDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
-    <p>Battery level: <span id="levelDisplay" style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
+    <p>Battery state: <span id="stateDisplay"
+                            style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
+    <p>Battery level: <span id="levelDisplay"
+                            style="border:1px solid #ccc; padding:5px; ">[waiting for plugin...]</span></p>
 </div>
 <div class="block">
     <a href="javascript:;" id="refreshStatus">Refresh state and level</a>
-    <a href="javascript:;" id="toggleMonitoring"><span id="monitoring" data-next-monitoring="off"></span> state monitoring</a>
+    <a href="javascript:;" id="toggleMonitoring"><span id="monitoring" data-next-monitoring="off"></span> state
+        monitoring</a>
 </div>
 <script type="text/javascript" src="js/zepto.min.js"></script>
-<script type="text/javascript" src="js/Cobalt-Web/cobalt.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
 
 
-<script type="text/javascript" src="../BatteryStatusPlugin/cobalt.batteryStatus.js"></script>
-<!--<script type="text/javascript" src="js/setTimeoutWorkaround.js"></script>-->
+<script type="text/javascript" src="js/Plugins-BatteryStatus-Web/cobalt.batteryStatus.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
 <script>
 
-    Zepto(function($) {
-        cobalt.init({
-            debug: app.debug,
-            debugInBrowser: app.debugInBrowser,
-            debugInDiv: app.debugInDiv
+  Zepto(function($) {
+    cobalt.init();
+
+    function displayState(data) {
+      $('#stateDisplay').html(data && data.state || 'Unknown');
+    }
+
+    function displayLevel(data) {
+      if (data && data.level >= 0) {
+        $('#levelDisplay').html(data.level + '%');
+      }
+      else {
+        $('#levelDisplay').html('Unknown');
+      }
+    }
+
+    function toggleMonitoring() {
+      var monitoring = $('#monitoring').attr('data-next-monitoring') === 'on';
+
+      if (monitoring) {
+        $('#monitoring').html('Stop').attr('data-next-monitoring', 'off');
+        cobalt.batteryStatus.startMonitoring({
+          onStateChanged: displayState
         });
+      }
+      else {
+        $('#monitoring').html('Start').attr('data-next-monitoring', 'on');
+        cobalt.batteryStatus.stopMonitoring();
+      }
+    }
 
-        function displayState(state) {
-            $('#stateDisplay').html(state);
-        }
+    // Update monitoring button state at app startup
+    toggleMonitoring();
 
-        function displayLevel(level) {
-            if (level >= 0) {
-                $('#levelDisplay').html(level + '%');
-            }
-            else {
-                $('#levelDisplay').html('unknown');
-            }
-        }
+    // Update state at app startup
+    cobalt.batteryStatus.getState(displayState);
 
-        function toggleMonitoring() {
-            var monitoring = $('#monitoring').attr('data-next-monitoring') == 'on';
+    // Update level at app startup
+    cobalt.batteryStatus.getLevel(displayLevel);
 
-            if (monitoring) {
-                $('#monitoring').html('Stop').attr('data-next-monitoring', 'off');
-                cobalt.batteryStatus.startMonitoring();
-            }
-            else {
-                $('#monitoring').html('Start').attr('data-next-monitoring', 'on');
-                cobalt.batteryStatus.stopMonitoring();
-            }
-        }
+    // Set monitoring callback
+    cobalt.batteryStatus.onStateChanged = displayState;
 
-        // Update monitoring button state at app startup
-        toggleMonitoring();
+    // Set monitoring button callback
+    app.touch('#toggleMonitoring', toggleMonitoring);
 
-        // Update state at app startup
-        cobalt.batteryStatus.getState(displayState);
-
-        // Update level at app startup
-        cobalt.batteryStatus.getLevel(displayLevel);
-
-        // Set monitoring callback
-        cobalt.batteryStatus.onStateChanged = displayState;
-
-        // Set monitoring button callback
-        app.touch('#toggleMonitoring', toggleMonitoring);
-
-        // Set refresh button callback
-        app.touch('#refreshStatus', function () {
-            cobalt.batteryStatus.getState(displayState);
-            cobalt.batteryStatus.getLevel(displayLevel);
-        });
-
-        app.initPage('BatteryStatus Plugin');
+    // Set refresh button callback
+    app.touch('#refreshStatus', function() {
+      cobalt.batteryStatus.getState(displayState);
+      cobalt.batteryStatus.getLevel(displayLevel);
     });
+
+    app.initPage('BatteryStatus Plugin');
+  });
 
 </script>
 

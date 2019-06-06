@@ -1,3 +1,55 @@
 [submodule "js/Cobalt-Web"]
 	path = js/Cobalt-Web
 	url = https://github.com/cobaltians/Cobalt-Web.git
+[submodule "js/Plugins-FirebaseAnalytics-Web"]
+	path = js/Plugins-FirebaseAnalytics-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-FirebaseAnalytics-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-Location-Web"]
+	path = js/Plugins-Location-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-Location-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-ActionPicker-Web"]
+	path = js/Plugins-ActionPicker-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-ActionPicker-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-AssetCache-Web"]
+	path = js/Plugins-AssetCache-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-AssetCache-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-NetworkStatus-Web"]
+	path = js/Plugins-NetworkStatus-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-NetworkStatus-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-BatteryStatus-Web"]
+	path = js/Plugins-BatteryStatus-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-BatteryStatus-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-AppInfos-Web"]
+	path = js/Plugins-AppInfos-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-AppInfos-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-Snackbar-Web"]
+	path = js/Plugins-Snackbar-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-Snackbar-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-Share-Web"]
+	path = js/Plugins-Share-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-Share-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-Pdf-Web"]
+	path = js/Plugins-Pdf-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-Pdf-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-GeolocPicker-Web"]
+	path = js/Plugins-GeolocPicker-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-GeolocPicker-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-Signature-Web"]
+	path = js/Plugins-Signature-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-Signature-Web.git
+	branch = cobalt1.0
+[submodule "js/Plugins-FCM-Web"]
+	path = js/Plugins-FCM-Web
+	url = git@github.com:Cobaltians-Plugins/Plugins-FCM-Web.git
+	branch = cobalt1.0

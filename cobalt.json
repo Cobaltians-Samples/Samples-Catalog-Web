@@ -1,0 +1,145 @@
+{
+  "controllers": {
+    "default": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity"
+    },
+    "dark": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "backgroundColor": "#3498DB",
+      "bars": {
+        "color": "#FFF",
+        "backgroundColor": "#3498DB"
+      }
+    },
+    "callbacks": {
+      "ios": "CallbacksController",
+      "android": ".activities.CallbacksActivity"
+    },
+    "events": {
+      "ios": "EventsController",
+      "android": ".activities.EventsActivity"
+    },
+    "index": {
+      "ios": "DefaultController",
+      "android": ".activities.IndexActivity"
+    },
+    "infiniteScroll": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "infiniteScroll": true,
+      "iosScrollToTop": true
+    },
+    "infiniteScrollNonActive": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity"
+    },
+    "modalTest": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity"
+    },
+    "nativeBars": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "bars": {
+        "visible": {
+          "top": true,
+          "bottom": false
+        },
+        "backgroundColor": "#FF4444",
+        "color": "FFF",
+        "title": "Native Bars",
+        "actions": [
+          {
+            "name": "moon",
+            "title": "Moon !",
+            "androidPosition": "top",
+            "iosPosition": "topRight",
+            "icon": "fa fa-moon-o"
+          },
+          {
+            "name": "bolt",
+            "title": "Bolt !",
+            "iosPosition": "topRight",
+            "androidPosition": "top",
+            "icon": "fa fa-bolt",
+            "color": "#FF0",
+            "badge": ""
+          },
+          {
+            "name": "sun",
+            "title": "Sun !",
+            "androidPosition": "overflow",
+            "iosPosition": "topRight",
+            "icon": "fa fa-sun-o",
+            "badge": ""
+          },
+          {
+            "name": "cloud",
+            "title": "Cloud is coming",
+            "iosPosition": "bottom",
+            "androidPosition": "overflow",
+            "icon": "fa fa-cloud"
+          },
+          {
+            "name": "sun2",
+            "title": "Sun !",
+            "androidPosition": "bottom",
+            "iosPosition": "bottom",
+            "icon": "fa fa-sun-o"
+          }
+        ]
+      }
+    },
+    "PTR_and_InfiniteScroll": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "pullToRefresh": true,
+      "infiniteScroll": true
+    },
+    "pullToRefresh": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "pullToRefresh": true
+    },
+    "coloredPullToRefresh": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "pullToRefresh": true,
+      "backgroundColor": "#3498DB"
+    },
+    "pullToRefreshCustom": {
+      "ios": "CustomizedPulltoRefreshViewController",
+      "android": ".activities.PullToRefreshCustomActivity",
+      "pullToRefresh": true
+    },
+    "pullToRefreshNonActive": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity"
+    },
+    "appEvents": {
+      "ios": "DefaultController",
+      "android": ".activities.DefaultActivity",
+      "pullToRefresh": true
+    },
+    "plugins": {
+      "ios": "DefaultController",
+      "android": ".activities.PluginsActivity",
+      "bars": {
+        "visibility": {
+          "top": true,
+          "bottom": false
+        },
+        "color": "#34DB98",
+        "backgroundColor": "#FFF"
+      }
+    }
+  },
+  "fonts": {
+    "fa": {
+      "ios": "FontAwesome",
+      "android": "org.cobaltians.fonts.fontAwesome.FontAwesomeDrawable"
+    }
+  }
+}

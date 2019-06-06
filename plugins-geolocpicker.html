@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body class="theme_green">
+
+<div class="block">
+    <p>This is the Geoloc Picker plugin, click on the button and choose an location.</p>
+</div>
+
+<div class="block">
+    <a href="javascript:;" id="choice">Select location !</a>
+</div>
+
+<div class="block">
+    <p>Your last location was : <b id="locationField" style="border:1px solid #ccc; padding:5px;"></b></p>
+
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/Cobalt-Web/cobalt.js"></script>
+
+
+<script type="text/javascript" src="js/Plugins-GeolocPicker-Web/cobalt.geolocpicker.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+  Zepto(function($) {
+    cobalt.init();
+
+    app.touch('#choice', function() {
+        cobalt.geolocPicker({
+            location: "48.758405, -3.470589",
+            address: "Kristal, 3 Rue Fulgence Bienvenue, 22300 Lannion"
+        }, function(data){
+            cobalt.log('location changed to', data);
+            document.getElementById('locationField').innerHTML = "Address : " + data.address + " at coordonates : " + data.location;
+        });
+    });
+    app.initPage('GeolocPicker Plugin')
+  })
+</script>
+
+</body>
+</html>
+
